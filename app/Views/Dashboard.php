@@ -73,13 +73,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-6 col-lg-7">
+                        <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Judul</th>
                                     <th scope="col">Isi</th>
                                     <th scope="col">Dibuat Pada</th>
                                     </tr>
@@ -91,6 +92,7 @@
                                                 <td><span class="badge bg-<?= $news['status'] ?>"><?= $news['status'] ?></span></td>
                                                 <td><?= $news['title'] ?></td>
                                                 <td><?= $news['content'] ?></td>
+                                                <td><?= $news['created_at'] ?></td>
                                             </tr>
                                 <?php endforeach ?>
                                 </tbody>
