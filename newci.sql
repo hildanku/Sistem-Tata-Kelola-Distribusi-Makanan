@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 02:36 PM
+-- Generation Time: May 10, 2023 at 03:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -206,6 +206,9 @@ CREATE TABLE `users` (
   `fullname` varchar(30) DEFAULT NULL,
   `username` varchar(30) DEFAULT NULL,
   `password_hash` varchar(255) NOT NULL,
+  `balance` int(10) NOT NULL,
+  `balance_usage` double NOT NULL,
+  `apikey` varchar(100) NOT NULL,
   `reset_hash` varchar(255) DEFAULT NULL,
   `reset_at` datetime DEFAULT NULL,
   `reset_expires` datetime DEFAULT NULL,
@@ -223,8 +226,23 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `email`, `fullname`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '', 'siapanich01@gmail.com', NULL, 'hildankusto', '$2y$10$J3XnpRmg9r/4rj40XWm.Duhw7BFmwfTqFWkObPpS4rHIGxyvsFX6W', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-05-02 16:12:12', '2023-05-02 16:12:12', NULL);
+INSERT INTO `users` (`id`, `uuid`, `email`, `fullname`, `username`, `password_hash`, `balance`, `balance_usage`, `apikey`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '', 'siapanich01@gmail.com', NULL, 'hildankusto', '$2y$10$J3XnpRmg9r/4rj40XWm.Duhw7BFmwfTqFWkObPpS4rHIGxyvsFX6W', 0, 0, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-05-02 16:12:12', '2023-05-02 16:12:12', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webconfig`
+--
+
+CREATE TABLE `webconfig` (
+  `id` int(11) NOT NULL,
+  `app_name` varchar(36) NOT NULL,
+  `app_title` varchar(36) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -312,6 +330,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indexes for table `webconfig`
+--
+ALTER TABLE `webconfig`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -368,6 +392,12 @@ ALTER TABLE `news`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `webconfig`
+--
+ALTER TABLE `webconfig`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
