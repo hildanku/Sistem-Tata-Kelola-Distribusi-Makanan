@@ -39,6 +39,10 @@ $routes->get('/news/edit/(:segment)', 'News::edit/$1');
 $routes->post('/news/update/(:segment)', 'News::update/$1');
 // $routes->delete('/user/delete/(:segment)', 'User::delete/$1');
 $routes->delete('/news/delete/(:segment)', 'News::delete/$1');
+
+$routes->get('/webconfig', 'WebConfig::index');
+
+
 //
 /*
  * --------------------------------------------------------------------
