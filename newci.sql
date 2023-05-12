@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 03:36 PM
+-- Generation Time: May 12, 2023 at 04:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -93,7 +93,8 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (2, '::1', 'siapanich01@gmail.com', 1, '2023-05-05 03:06:04', 1),
 (3, '::1', 'siapanich01@gmail.com', 1, '2023-05-05 03:30:12', 1),
 (4, '::1', 'siapanich01@gmail.com', 1, '2023-05-07 10:26:37', 1),
-(5, '::1', 'siapanich01@gmail.com', 1, '2023-05-07 10:34:28', 1);
+(5, '::1', 'siapanich01@gmail.com', 1, '2023-05-07 10:34:28', 1),
+(6, '::1', 'siapanich01@gmail.com', 1, '2023-05-12 01:04:25', 1);
 
 -- --------------------------------------------------------
 
@@ -237,12 +238,20 @@ INSERT INTO `users` (`id`, `uuid`, `email`, `fullname`, `username`, `password_ha
 
 CREATE TABLE `webconfig` (
   `id` int(11) NOT NULL,
+  `app_logo` varchar(36) NOT NULL,
   `app_name` varchar(36) NOT NULL,
   `app_title` varchar(36) NOT NULL,
   `description` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `webconfig`
+--
+
+INSERT INTO `webconfig` (`id`, `app_logo`, `app_name`, `app_title`, `description`, `created_at`, `updated_at`) VALUES
+(1, '', 'Aplikasi-Asal', 'APP ASAL::GG', 'asdasdas', '2023-05-12 01:10:47', '2023-05-12 01:10:47');
 
 --
 -- Indexes for dumped tables
@@ -355,7 +364,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -397,7 +406,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `webconfig`
 --
 ALTER TABLE `webconfig`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
