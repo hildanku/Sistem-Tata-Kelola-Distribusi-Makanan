@@ -1,7 +1,7 @@
 <?php $this->extend('_partial/Master.php') ?>
 
 <?= $this->section('content') ?>
-    <?= form_open('/news/update/'.$data['id']) ?>
+    <?= form_open('admin/news/update/'.$data['id']) ?>
     <div class="form-group">
         <label for="status">Status</label>
             <select class="form-control" id="status" name="status" value="<?= $data['status'] ?>">

@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
                 <div class="row">
                     <div class="container-fluid">
-                    <a href="<?= base_url('news/add') ?>" class="btn btn-outline-primary">Add</a>
+                    <a href="<?= base_url('admin/news/add') ?>" class="btn btn-outline-primary">Add</a>
                     </div>
                 </div>
                 <br>
@@ -34,7 +34,7 @@
                                 <td><?= $news['content'] ?></td>
                                 <td><?= $news['created_at'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('news/edit/'.$news['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                    <a href="<?= base_url('admin/news/edit/'.$news['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
                                     <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $news['id'] ?>" data-toggle="modal" data-target="#deleteModal">
                                         Hapus
                                     </button>
@@ -93,7 +93,7 @@
                 $(document).on('click', '.btn-ok', function () {
                     var uuid = $(this).data('uuid');
                     $.ajax({
-                        url: '<?= base_url('news/delete') ?>/' + uuid,
+                        url: '<?= base_url('admin/news/delete') ?>/' + uuid,
                         type: 'DELETE',
                         success: function (data) {
                             if (data.success) {

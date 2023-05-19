@@ -1,7 +1,7 @@
 <?php $this->extend('_partial/Master.php') ?>
 
 <?= $this->section('content') ?>
-    <form action="<?= base_url('news/store') ?>" method="post">
+    <form action="<?= base_url('admin/news/store') ?>" method="post">
     <div class="form-group">
         <label for="status">Status</label>
             <select class="form-control" id="status" name="status">
