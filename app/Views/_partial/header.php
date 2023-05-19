@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?= $appTitle; ?></title>
+    <title><?= $appTitle ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('sb2/vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">

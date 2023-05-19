@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Models\WebConfigModel;
+
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
@@ -21,6 +23,14 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+    // protected $appTitle;
+
+    // public function __construct()
+    // {
+    //     $model = new WebConfigModel();
+    //     $config = $model->getConfig();
+    //     $this->appTitle = $config['app_title'];
+    // }
     /**
      * Instance of the main Request object.
      *
