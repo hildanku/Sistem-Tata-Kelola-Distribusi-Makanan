@@ -33,7 +33,6 @@ $routes->set404Override();
 $routes->get('/', 'Dashboard::index');
 
 $routes->group('admin', function($routes) {
-    // kelola berita
     $routes->get('news', 'News::index');
     $routes->get('news/add', 'News::add');
     $routes->post('news/store', 'News::store');
@@ -42,9 +41,10 @@ $routes->group('admin', function($routes) {
     $routes->delete('news/delete/(:segment)', 'News::delete/$1');
     //web config
     $routes->get('webconfig', 'WebConfig::index');
+    $routes->get('webconfig/edit/(:segment)', 'WebConfig::edit/$1');
 
 });
-
+//$routes->get('news', 'News::index');
 
 //
 /*

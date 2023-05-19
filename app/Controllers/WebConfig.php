@@ -12,4 +12,8 @@ class WebConfig extends BaseController
         return view('Admin/WebConfig/index', ['getConfig' => $getConfig]);
       // return view('users/index');
     }
+    public function edit()
+    {
+      return view('Admin/WebConfig/add');
+    }
 }
