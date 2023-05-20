@@ -7,8 +7,8 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span><i class="fa fa-heart"></i> by hildanku</span>
+                    <div class="copyright text-left my-auto">
+                        <span><i class="fa fa-heart"></i> by hildanku & friend</span>
                     </div>
                 </div>
             </footer>

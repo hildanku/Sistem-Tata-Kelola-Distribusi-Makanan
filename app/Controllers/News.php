@@ -3,14 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\NewsModel; 
+use App\Models\WebConfigModel;  
 
 class News extends BaseController
 {
     public function index()
     {
+        $model = new WebConfigModel();
+        $config = $model->getConfig();
+
         $model = new NewsModel();
         $getNews = $model->findAll();
-        return view('Admin/News/index', ['getNews' => $getNews]);
+        return view('Admin/News/index', [
+            'getNews' => $getNews,
+            'appTitle' => $config['app_title'],
+            'appName' => $config['app_name']
+            ]);
 
     }
     public function add()

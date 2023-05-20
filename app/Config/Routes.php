@@ -42,6 +42,9 @@ $routes->group('admin', function($routes) {
     //web config
     $routes->get('webconfig', 'WebConfig::index');
     $routes->get('webconfig/edit/(:segment)', 'WebConfig::edit/$1');
+    $routes->post('webconfig/update/(:segment)', 'WebConfig::update/$1');
+    // customer
+    $routes->get('customers', 'Customer::index');
 
 });
 //$routes->get('news', 'News::index');

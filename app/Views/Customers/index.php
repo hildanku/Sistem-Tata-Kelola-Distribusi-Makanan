@@ -2,6 +2,9 @@
 
 <?= $this->section('content') ?>
 <div class="row">
+                    <div class="container-fluid">
+                    <a href="<?= base_url('news/add') ?>" class="btn btn-outline-primary">Add</a>
+                    </div>
                 </div>
                 <br>
                    <?php if (session()->has('success')) : ?>
@@ -23,16 +26,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php if ($config !== null) : ?>
+                        <?php if ($getConfig !== null) : ?>
                             <tr>
-                                <th scope="row">#<?= $config['id'] ?></th>
-                                <td><?= $config['app_logo'] ?></td>
-                                <td><?= $config['app_name'] ?></td>
-                                <td><?= $config['app_title'] ?></td>
-                                <td><?= $config['description'] ?></td>
+                                <th scope="row">#<?= $getConfig['id'] ?></th>
+                                <td><?= $getConfig['app_logo'] ?></td>
+                                <td><?= $getConfig['app_name'] ?></td>
+                                <td><?= $getConfig['app_title'] ?></td>
+                                <td><?= $getConfig['description'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('admin/webconfig/edit/'.$config['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
-                                    <!-- <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $config['id'] ?>" data-toggle="modal" data-target="#deleteModal">
+                                    <a href="<?= base_url('news/edit/'.$getConfig['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                    <!-- <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $getConfig['id'] ?>" data-toggle="modal" data-target="#deleteModal">
                                         Hapus
                                     </button> -->
                                 </td>
