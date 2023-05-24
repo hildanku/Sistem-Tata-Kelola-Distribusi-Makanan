@@ -61,7 +61,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
-                        <a class="collapse-item" href="404.html">Kelola Pelanggan</a>
+                        <a class="collapse-item" href="<?= base_url('/admin/customers') ?>">Kelola Pelanggan</a>
                     </div>
                 </div>
             </li>

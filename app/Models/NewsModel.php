@@ -18,8 +18,4 @@ class NewsModel extends Model
     protected $updatedField  = 'updated_at';
     protected $dateFormat   = 'datetime';
     
-    public function getNews()
-    {
-        return $this->findAll();
-    }
 }

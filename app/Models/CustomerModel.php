@@ -11,15 +11,11 @@ class CustomerModel extends Model
 
     protected $useAutoIncrement = true;
 
-    protected $allowedFields = ['uuid', 'shop_name', 'shop_owner', 'shop_address', 'phone_number', 'email'];
+    protected $allowedFields = ['uuid', 'shop_name', 'shop_owner', 'shop_address', 'phone_number', 'email', 'status'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $dateFormat   = 'datetime';
     
-    public function getCustomer()
-    {
-        return $this->findAll();
-    }
 }

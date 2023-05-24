@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="row">
                     <div class="container-fluid">
-                    <a href="<?= base_url('news/add') ?>" class="btn btn-outline-primary">Add</a>
+                    <a href="<?= base_url('admin/customers/add') ?>" class="btn btn-outline-primary">Add</a>
                     </div>
                 </div>
                 <br>
@@ -16,31 +16,32 @@
                 <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                        <th scope="col">Logo</th>
-                        <th scope="col">Nama Website</th>
-                        <th scope="col">Judul Website</th>
-                        <th scope="col">Deskripsi</th>
-                        <th scope="col">Aksi</th>
-                                                    
+                        <th scope="col">#</th>
+                        <th scope="col">Nama Toko</th>
+                        <th scope="col">Nama Pemilik</th>
+                        <th scope="col">Alamat Toko</th>
+                        <th scope="col">Nomor HP</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Aksi</th>                             
                     </tr>
                 </thead>
                 <tbody>
-                        <?php if ($getConfig !== null) : ?>
+                         <?php foreach($getData as $key => $data) : ?>
                             <tr>
-                                <th scope="row">#<?= $getConfig['id'] ?></th>
-                                <td><?= $getConfig['app_logo'] ?></td>
-                                <td><?= $getConfig['app_name'] ?></td>
-                                <td><?= $getConfig['app_title'] ?></td>
-                                <td><?= $getConfig['description'] ?></td>
+                                <th scope="row"><?= $data['id'] ?></th>
+                                <td><?= $data['shop_name'] ?></td>
+                                <td><?= $data['shop_owner'] ?></td>
+                                <td><?= $data['shop_address'] ?></td>
+                                <td><?= $data['phone_number'] ?></td>
+                                <td><?= $data['email'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('news/edit/'.$getConfig['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
-                                    <!-- <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $getConfig['id'] ?>" data-toggle="modal" data-target="#deleteModal">
+                                    <a href="<?= base_url('admin/customer/edit/'.$data['uuid']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                    <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['uuid'] ?>" data-toggle="modal" data-target="#deleteModal">
                                         Hapus
-                                    </button> -->
+                                    </button>
                                 </td>
                             </tr>
-                        <?php endif; ?>
+                        <?php endforeach   ?>
                 </tbody>
                 </table>
                 <!---                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
@@ -93,7 +94,7 @@
                 $(document).on('click', '.btn-ok', function () {
                     var uuid = $(this).data('uuid');
                     $.ajax({
-                        url: '<?= base_url('webconfig/delete') ?>/' + uuid,
+                        url: '<?= base_url('admin/customer/delete') ?>/' + uuid,
                         type: 'DELETE',
                         success: function (data) {
                             if (data.success) {

@@ -23,7 +23,12 @@ class News extends BaseController
     }
     public function add()
     {
-        return view('Admin/News/add');
+        $model = new WebConfigModel();
+        $config = $model->getConfig();  
+        return view('Admin/News/add', [
+            'appTitle' => $config['app_title'],
+            'appName' => $config['app_name']
+        ]);
     }
     public function store()
     {
@@ -35,14 +40,21 @@ class News extends BaseController
         ];
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
         $model->save($data);
-        return redirect()->to('/news');
+        return redirect()->to('/admin/news');
     }
     public function edit($id)
     {
         helper('form');
+        $model = new WebConfigModel();
+        $config = $model->getConfig();  
+
         $model = new NewsModel();
         $data = $model->where('id', $id)->first();
-        return view('Admin/News/edit', ['data' => $data]);
+        return view('Admin/News/edit', [
+            'data' => $data,
+            'appTitle' => $config['app_title'],
+            'appName' => $config['app_name']
+        ]);
     }
     public function update($id)
     {
@@ -54,7 +66,7 @@ class News extends BaseController
         ];
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         $model->where('id', $id)->set($data)->update();
-        return redirect()->to('/news');
+        return redirect()->to('/admin/news');
     }
     public function delete($id)
     {

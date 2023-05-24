@@ -45,7 +45,11 @@ $routes->group('admin', function($routes) {
     $routes->post('webconfig/update/(:segment)', 'WebConfig::update/$1');
     // customer
     $routes->get('customers', 'Customer::index');
-
+    $routes->get('customers/add', 'Customer::add');
+    $routes->post('customers/store', 'Customer::store');
+    $routes->get('customer/edit/(:segment)', 'Customer::edit/$1');
+    $routes->post('customer/update/(:segment)', 'Customer::update/$1');
+    $routes->delete('customer/delete/(:segment)', 'Customer::delete/$1');
 });
 //$routes->get('news', 'News::index');
 
