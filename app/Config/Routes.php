@@ -64,6 +64,8 @@ $routes->group('admin', function($routes) {
     $routes->get('product/category/edit/(:segment)', 'ProductCategory::edit/$1');
     $routes->post('product/category/update/(:segment)', 'ProductCategory::update/$1');
     $routes->delete('product/category/delete/(:segment)', 'ProductCategory::delete/$1');
+    // driver
+    $routes->get('drivers', 'Driver::index');
 });
 //$routes->get('news', 'News::index');
 
