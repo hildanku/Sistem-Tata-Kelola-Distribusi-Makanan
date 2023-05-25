@@ -1,7 +1,7 @@
 <?php $this->extend('_partial/Master.php') ?>
 
 <?= $this->section('content') ?>
-    <form action="<?= base_url('admin/customers/store') ?>" method="post">
+    <form action="<?= base_url('admin/customer/store') ?>" method="post">
 
         <div class="form-group">
             <label for="title">Nama Toko</label>

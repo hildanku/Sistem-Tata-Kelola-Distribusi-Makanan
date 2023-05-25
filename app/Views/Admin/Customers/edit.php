@@ -30,7 +30,7 @@
                 <option value="Tidak Aktif">Tidak Aktif</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Edit Berita</button>
+        <button type="submit" class="btn btn-primary">Edit Pelanggan</button>
 
     <?= form_close() ?>
 

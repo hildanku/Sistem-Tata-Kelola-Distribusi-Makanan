@@ -45,11 +45,25 @@ $routes->group('admin', function($routes) {
     $routes->post('webconfig/update/(:segment)', 'WebConfig::update/$1');
     // customer
     $routes->get('customers', 'Customer::index');
-    $routes->get('customers/add', 'Customer::add');
-    $routes->post('customers/store', 'Customer::store');
+    $routes->get('customer/add', 'Customer::add');
+    $routes->post('customer/store', 'Customer::store');
     $routes->get('customer/edit/(:segment)', 'Customer::edit/$1');
     $routes->post('customer/update/(:segment)', 'Customer::update/$1');
     $routes->delete('customer/delete/(:segment)', 'Customer::delete/$1');
+    //products
+    $routes->get('products', 'Product::index');
+    $routes->get('product/add', 'Product::add');
+    $routes->post('product/store', 'Product::store');
+    $routes->get('product/edit/(:segment)', 'Product::edit/$1');
+    $routes->post('product/update/(:segment)', 'Product::update/$1');
+    $routes->delete('product/delete/(:segment)', 'Product::delete/$1');
+    // product category
+    $routes->get('product/category', 'ProductCategory::index');
+    $routes->get('product/category/add', 'ProductCategory::add');
+    $routes->post('product/category/store', 'ProductCategory::store');
+    $routes->get('product/category/edit/(:segment)', 'ProductCategory::edit/$1');
+    $routes->post('product/category/update/(:segment)', 'ProductCategory::update/$1');
+    $routes->delete('product/category/delete/(:segment)', 'ProductCategory::delete/$1');
 });
 //$routes->get('news', 'News::index');
 

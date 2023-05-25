@@ -18,7 +18,7 @@
             <label for="username">Isi</label>
             <input type="text" class="form-control" id="content" name="content" required>
         </div>
-        <button type="submit" class="btn btn-primary">Tambah Berita</button>
+        <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
     </form>
 
 <?= $this->endSection() ?>
