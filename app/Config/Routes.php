@@ -66,6 +66,11 @@ $routes->group('admin', function($routes) {
     $routes->delete('product/category/delete/(:segment)', 'ProductCategory::delete/$1');
     // driver
     $routes->get('drivers', 'Driver::index');
+    $routes->get('driver/add', 'Driver::add');
+    $routes->post('driver/store', 'Driver::store');
+    $routes->get('driver/edit/(:segment)', 'Driver::edit/$1');
+    $routes->post('driver/update/(:segment)', 'Driver::update/$1');
+    $routes->delete('driver/delete/(:segment)', 'Driver::delete/$1');
 });
 //$routes->get('news', 'News::index');
 

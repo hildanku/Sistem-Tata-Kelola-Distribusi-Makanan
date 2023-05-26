@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class DriverModel extends Model
 {
-    protected $table      = 'driver';
+    protected $table      = 'drivers';
     protected $primaryKey = 'driver_id';
 
     protected $useAutoIncrement = true;

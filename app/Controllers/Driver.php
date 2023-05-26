@@ -14,9 +14,20 @@ class Driver extends BaseController
 
         $model = new DriverModel();
         $getData = $model->findAll();
-        return view('Admin/Driver/index', [
+        return view('Admin/Drivers/index', [
           'getData' => $getData,
           'config' => $config,
+          'appTitle' => $config['app_title'],
+          'appName' => $config['app_name']
+        ]);
+      // return view('users/index');
+    }
+    public function add()
+    {
+
+        $model = new WebConfigModel();
+        $config = $model->first();
+        return view('Admin/Drivers/add', [
           'appTitle' => $config['app_title'],
           'appName' => $config['app_name']
         ]);
