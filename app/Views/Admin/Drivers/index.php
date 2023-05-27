@@ -33,7 +33,7 @@
                                 <td><?= $data['driver_email'] ?></td>
                                 <td><?= $data['driver_status'] ?></td>   
                                 <td>
-                                    <a href="<?= base_url('admin/customer/edit/'.$data['driver_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                    <a href="<?= base_url('admin/driver/edit/'.$data['driver_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
                                     <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['driver_id'] ?>" data-toggle="modal" data-target="#deleteModal">
                                         Hapus
                                     </button>
