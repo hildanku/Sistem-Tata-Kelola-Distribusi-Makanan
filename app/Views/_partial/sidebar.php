@@ -60,7 +60,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Kelola Produk</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -78,7 +78,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('/admin/distributions') ?>">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-truck"></i>
                     <span>Kelola Distribusi</span></a>
             </li>
             <!-- <li class="nav-item">

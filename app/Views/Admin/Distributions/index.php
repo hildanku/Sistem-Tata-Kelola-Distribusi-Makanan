@@ -20,9 +20,10 @@
                         <th scope="col">Nama Kurir</th>
                         <th scope="col">Nama Produk</th>
                         <th scope="col">Alamat Distribusi</th>
-                        <th scope="col">Waktu/Tanggal Distribusi</th>
                         <th scope="col">Deskripsi Distribusi</th>
                         <th scope="col">Status Distribusi</th>     
+                        <th scope="col">Waktu/Tanggal Distribusi</th>
+                        <!-- <th scope="col">Waktu Tiba</th> -->
                         <th scope="col">Aksi</th>                             
                     </tr>
                 </thead>
@@ -45,9 +46,9 @@
                                     <?php endforeach; ?>
                                 </td>
                                 <td><?= $data['distribution_destination'] ?></td>
-                                <td><?= $data['distribution_datetime'] ?></td>
                                 <td><?= $data['distribution_description'] ?></td>
                                 <td><?= $data['distribution_progress'] ?></td>
+                                <td><?= $data['distribution_datetime'] ?></td>
                                 <td>
                                     <a href="<?= base_url('admin/distribution/edit/'.$data['distribution_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
                                     <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['distribution_id'] ?>" data-toggle="modal" data-target="#deleteModal">
