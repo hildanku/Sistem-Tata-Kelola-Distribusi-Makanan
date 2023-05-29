@@ -8,16 +8,22 @@ use App\Models\ProductCategoryModel;
 
 class Product extends BaseController
 {
+    protected $webconfigM;
+    protected $productM;
+    protected $productcatM;
+    public function __construct()
+    {
+        $this->webconfigM = new WebConfigModel();
+        $this->productM = new ProductModel();
+        $this->productcatM = new ProductCategoryModel();
+    }
     public function index()
     {
    //     $model = new ProductCategoryModel();
    //     $getCategory = $model->findAll();
 
-        $model = new WebConfigModel();
-        $config = $model->getConfig();
-
-        $model = new ProductModel();
-        $getData = $model->findAll();
+        $config = $this->webconfigM->first();
+        $getData = $this->productM->findAll();
         return view('Admin/Products/index', [
             'getData' => $getData,
       //      'getCategory' => $getCategory,
@@ -28,11 +34,9 @@ class Product extends BaseController
     }
     public function add()
     {
-        $model = new ProductCategoryModel();
-        $getCategory = $model->findAll();
+        $config = $this->webconfigM->first();
+        $getCategory = $this->productcatM->findAll();
 
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
         return view('Admin/Products/add', [
             'getCategory' => $getCategory,
             'appTitle' => $config['app_title'],
@@ -41,7 +45,6 @@ class Product extends BaseController
     }
     public function store()
     {
-        $model = new ProductModel();
         $data = [
             'product_name' => $this->request->getPost('product_name'),
             'product_description' => $this->request->getPost('product_description'),
@@ -52,20 +55,16 @@ class Product extends BaseController
             'product_expired' => $this->request->getPost('product_expired'),
         ];
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $model->save($data);
+        $this->productM->save($data);
         return redirect()->to('/admin/products');
     }
     public function edit($product_id)
     {
         helper('form');
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
-        $model = new ProductCategoryModel();
-        $getCategory = $model->findAll();
-
-        $model = new ProductModel();
-        $data = $model->where('product_id', $product_id)->first();
-
+        $config = $this->webconfigM->first();
+        $getCategory = $this->productcatM->findAll();
+        $data = $this->productM->where('product_id', $product_id)->first();
+      
         return view('Admin/Products/edit', [
             'getCategory' => $getCategory,
             'data' => $data,
@@ -75,7 +74,7 @@ class Product extends BaseController
     }
     public function update($product_id)
     {
-        $model = new ProductModel();
+
         $data = [
             'product_name' => $this->request->getPost('product_name'),
             'product_description' => $this->request->getPost('product_description'),
@@ -86,17 +85,16 @@ class Product extends BaseController
             'product_expired' => $this->request->getPost('product_expired'),
         ];
         session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $model->where('product_id', $product_id)->set($data)->update();
+        $this->productM->where('product_id', $product_id)->set($data)->update();
         return redirect()->to('/admin/products');
     }
     public function delete($product_id)
     {
-        $model = new ProductModel();
-        $data = $model->where('product_id', $product_id)->first();
+        $data = $this->productM->where('product_id', $product_id)->first();
         if (!$data) {
             return $this->response->setJSON(['success' => false]);
         }
-        $model->where('product_id', $product_id)->delete();
+        $this->productM->where('product_id', $product_id)->delete();
         return $this->response->setJSON(['success' => true]);
     }
 }

@@ -6,21 +6,17 @@ use App\Models\DriverModel;
 
 class Driver extends BaseController
 {
-
   protected $WebConfigM;
   protected $DriverM;
-  public function __construct()
-  {
-    $this->webconfigM = new WebConfigModel();
-    $this->driverM = new DriverModel();
-  }
-
+    public function __construct()
+    {
+      $this->webconfigM = new WebConfigModel();
+      $this->driverM = new DriverModel();
+    }
     public function index()
     {
-
         // $model = new WebConfigModel();
         // $config = $model->first();
-
         $config = $this->webconfigM->first();
         $getData = $this->driverM->findAll();
       
@@ -34,9 +30,7 @@ class Driver extends BaseController
     }
     public function add()
     {
-
       $config = $this->webconfigM->first();
-
         return view('Admin/Drivers/add', [
           'appTitle' => $config['app_title'],
           'appName' => $config['app_name']
@@ -45,7 +39,6 @@ class Driver extends BaseController
     }
     public function store()
     {
-
         $data = [
             'driver_name' => $this->request->getPost('driver_name'),
             'driver_phone' => $this->request->getPost('driver_phone'),

@@ -31,11 +31,11 @@
 
         <div class="form-group">
             <label for="username">Waktu Produksi</label>
-            <input type="text" class="form-control" id="product_made" name="product_made" value="<?= $data['product_made'] ?>" required>
+            <input type="datetime-local" class="form-control" id="product_made" name="product_made" value="<?= $data['product_made'] ?>" required>
         </div>
         <div class="form-group">
             <label for="username">Waktu Expired</label>
-            <input type="text" class="form-control" id="product_expired" name="product_expired" value="<?= $data['product_expired'] ?>" required>
+            <input type="datetime-local" class="form-control" id="product_expired" name="product_expired" value="<?= $data['product_expired'] ?>" required>
         </div>
         <button type="submit" class="btn btn-primary">Edit Produk</button>
 

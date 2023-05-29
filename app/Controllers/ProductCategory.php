@@ -7,18 +7,23 @@ use App\Models\ProductCategoryModel;
 
 class ProductCategory extends BaseController
 {
+    protected $webconfigM;
+    protected $productcatM;
+    public function __construct()
+    {
+        $this->webconfigM = new WebConfigModel();
+        $this->productcatM = new ProductCategoryModel();
+    }
     public function index()
     {
    //     $model = new ProductCategoryModel();
    //     $getCategory = $model->findAll();
 
-        $model = new WebConfigModel();
-        $config = $model->getConfig();
+        $config = $this->webconfigM->first();
+        $getData = $this->productcatM->findAll();
 
-        $model = new ProductCategoryModel();
-        $data = $model->findAll();
         return view('Admin/Products/Category/index', [
-            'getData' => $data,
+            'getData' => $getData,
       //      'getCategory' => $getCategory,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
@@ -27,8 +32,7 @@ class ProductCategory extends BaseController
     }
     public function add()
     {
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
+        $config = $this->webconfigM->first();
         return view('Admin/Products/Category/add', [
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
@@ -36,25 +40,22 @@ class ProductCategory extends BaseController
     }
     public function store()
     {
-        $model = new ProductCategoryModel();
         $data = [
             'category_name' => $this->request->getPost('category_name')
         ];
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $model->save($data);
+        $this->productcatM->save($data);
         return redirect()->to('/admin/product/category');
     }
     public function edit($category_id)
     {
         helper('form');
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
 
-        $model = new ProductCategoryModel();
-        $getData = $model->where('category_id', $category_id)->first();
-
+        $config = $this->webconfigM->first();
+        $getData = $this->productcatM->where('category_id', $category_id)->first();
+      
         return view('Admin/Products/Category/edit', [
-            'data' => $getData,
+            'getData' => $getData,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
         ]);

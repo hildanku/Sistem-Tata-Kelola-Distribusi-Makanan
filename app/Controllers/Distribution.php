@@ -23,10 +23,8 @@ class Distribution extends BaseController
 
     public function index()
     {
-
         // $model = new WebConfigModel();
         // $config = $model->first();
-
         $config = $this->webconfigM->first();
         $getDrivers = $this->driverM->findAll();
         $getProducts = $this->productM->findAll();
@@ -57,7 +55,6 @@ class Distribution extends BaseController
     }
     public function store()
     {
-
         $data = [
             'driver_id' => $this->request->getPost('driver_id'),
             'product_id' => $this->request->getPost('product_id'),
@@ -73,7 +70,6 @@ class Distribution extends BaseController
     public function edit($distribution_id)
     {
         helper('form');
-
         $config = $this->webconfigM->first();
         $getDrivers = $this->driverM->findAll();
         $getProducts = $this->productM->findAll();

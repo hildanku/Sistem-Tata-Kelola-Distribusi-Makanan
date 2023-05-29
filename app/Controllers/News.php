@@ -2,18 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\NewsModel; 
 use App\Models\WebConfigModel;  
+use App\Models\NewsModel; 
 
 class News extends BaseController
 {
+    protected $webconfig;
+    protected $newsM;
+
+    public function __construct()
+    {
+        $this->webconfigM = new WebConfigModel();
+        $this->newsM = new NewsModel();
+    }
     public function index()
     {
-        $model = new WebConfigModel();
-        $config = $model->getConfig();
-
-        $model = new NewsModel();
-        $getNews = $model->findAll();
+        $config = $this->webconfigM->first();
+        $getNews = $this->newsM->findAll();
         return view('Admin/News/index', [
             'getNews' => $getNews,
             'appTitle' => $config['app_title'],
@@ -23,8 +28,7 @@ class News extends BaseController
     }
     public function add()
     {
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
+        $config = $this->webconfigM->first();
         return view('Admin/News/add', [
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
@@ -32,24 +36,21 @@ class News extends BaseController
     }
     public function store()
     {
-        $model = new NewsModel();
         $data = [
             'status' => $this->request->getPost('status'),
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $model->save($data);
+        $this->newsM->save($data);
         return redirect()->to('/admin/news');
     }
     public function edit($id)
     {
         helper('form');
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
+        $config = $this->webconfigM->first();
+        $data = $this->newsM->where('id', $id)->first();
 
-        $model = new NewsModel();
-        $data = $model->where('id', $id)->first();
         return view('Admin/News/edit', [
             'data' => $data,
             'appTitle' => $config['app_title'],
@@ -58,24 +59,22 @@ class News extends BaseController
     }
     public function update($id)
     {
-        $model = new NewsModel();
         $data = [
             'status' => $this->request->getPost('status'),
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
         session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $model->where('id', $id)->set($data)->update();
+        $this->newsM->where('id', $id)->set($data)->update();
         return redirect()->to('/admin/news');
     }
     public function delete($id)
     {
-        $model = new NewsModel();
-        $data = $model->where('id', $id)->first();
+        $data = $this->newsM->where('id', $id)->first();
         if (!$data) {
             return $this->response->setJSON(['success' => false]);
         }
-        $model->where('id', $id)->delete();
+        $this->newsM->where('id', $id)->delete();
         return $this->response->setJSON(['success' => true]);
     }
 }
