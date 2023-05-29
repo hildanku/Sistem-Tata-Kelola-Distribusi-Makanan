@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="row">
                     <div class="container-fluid">
-                    <a href="<?= base_url('admin/customer/add') ?>" class="btn btn-outline-primary">Add</a>
+                    <a href="<?= base_url('admin/driver/add') ?>" class="btn btn-outline-primary">Add</a>
                     </div>
                 </div>
                 <br>

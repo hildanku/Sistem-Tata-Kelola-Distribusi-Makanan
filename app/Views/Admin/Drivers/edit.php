@@ -4,15 +4,15 @@
     <?= form_open('admin/driver/update/'.$data['driver_id']) ?>
 
     <div class="form-group">
-            <label for="title">Nama Toko</label>
+            <label for="title">Nama Kurir</label>
             <input type="text" class="form-control" id="driver_name" name="driver_name"  value="<?= $data['driver_name'] ?>" required>
         </div>
         <div class="form-group">
-            <label for="username">Nama Pemilik Toko</label>
+            <label for="username">Nomor HP</label>
             <input type="text" class="form-control" id="driver_phone" name="driver_phone" value="<?= $data['driver_phone'] ?>" required>
         </div>
         <div class="form-group">
-            <label for="username">Alamat Toko</label>
+            <label for="username">Email</label>
             <input type="text" class="form-control" id="driver_email" name="driver_email" value="<?= $data['driver_email'] ?>" required>
         </div>
         <div class="form-group">

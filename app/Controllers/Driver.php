@@ -6,14 +6,24 @@ use App\Models\DriverModel;
 
 class Driver extends BaseController
 {
+
+  protected $WebConfigM;
+  protected $DriverM;
+  public function __construct()
+  {
+    $this->webconfigM = new WebConfigModel();
+    $this->driverM = new DriverModel();
+  }
+
     public function index()
     {
 
-        $model = new WebConfigModel();
-        $config = $model->first();
+        // $model = new WebConfigModel();
+        // $config = $model->first();
 
-        $model = new DriverModel();
-        $getData = $model->findAll();
+        $config = $this->webconfigM->first();
+        $getData = $this->driverM->findAll();
+      
         return view('Admin/Drivers/index', [
           'getData' => $getData,
           'config' => $config,
@@ -25,8 +35,8 @@ class Driver extends BaseController
     public function add()
     {
 
-        $model = new WebConfigModel();
-        $config = $model->first();
+      $config = $this->webconfigM->first();
+
         return view('Admin/Drivers/add', [
           'appTitle' => $config['app_title'],
           'appName' => $config['app_name']
@@ -35,7 +45,7 @@ class Driver extends BaseController
     }
     public function store()
     {
-        $model = new NewsModel();
+
         $data = [
             'driver_name' => $this->request->getPost('driver_name'),
             'driver_phone' => $this->request->getPost('driver_phone'),
@@ -43,17 +53,14 @@ class Driver extends BaseController
             'driver_status' => $this->request->getPost('driver_status'),
         ];
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $model->save($data);
+        $this->driverM->save($data);
         return redirect()->to('/admin/drivers');
     }
     public function edit($driver_id)
     {
         helper('form');
-        $model = new WebConfigModel();
-        $config = $model->getConfig();  
-
-        $model = new DriverModel();
-        $data = $model->where('driver_id', $driver_id)->first();
+        $config = $this->webconfigM->first();
+        $data = $this->driverM->where('driver_id', $driver_id)->first();
         return view('Admin/Drivers/edit', [
             'data' => $data,
             'appTitle' => $config['app_title'],
@@ -62,7 +69,6 @@ class Driver extends BaseController
     }
     public function update($driver_id)
     {
-        $model = new DriverModel();
         $data = [
           'driver_name' => $this->request->getPost('driver_name'),
           'driver_phone' => $this->request->getPost('driver_phone'),
@@ -70,17 +76,16 @@ class Driver extends BaseController
           'driver_status' => $this->request->getPost('driver_status'),
         ];
         session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $model->where('driver_id', $driver_id)->set($data)->update();
+        $this->driverM->where('driver_id', $driver_id)->set($data)->update();
         return redirect()->to('/admin/drivers');
     }
     public function delete($driver_id)
     {
-        $model = new DriverModel();
-        $data = $model->where('driver_id', $driver_id)->first();
+        $data = $this->driverM->where('driver_id', $driver_id)->first();
         if (!$data) {
             return $this->response->setJSON(['success' => false]);
         }
-        $model->where('driver_id', $driver_id)->delete();
+        $this->driverM->where('driver_id', $driver_id)->delete();
         return $this->response->setJSON(['success' => true]);
     }
 }

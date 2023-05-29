@@ -1,36 +1,27 @@
 <?php $this->extend('_partial/Master.php') ?>
 
 <?= $this->section('content') ?>
-    <form action="<?= base_url('admin/customer/store') ?>" method="post">
-
-        <div class="form-group">
-            <label for="title">Nama Toko</label>
-            <input type="text" class="form-control" id="shop_name" name="shop_name" required>
-        </div>
-        <div class="form-group">
-            <label for="username">Nama Pemilik Toko</label>
-            <input type="text" class="form-control" id="shop_owner" name="shop_owner" required>
-        </div>
-        <div class="form-group">
-            <label for="username">Alamat Toko</label>
-            <input type="text" class="form-control" id="shop_address" name="shop_address" required>
+    <form action="<?= base_url('admin/driver/store') ?>" method="post">
+    <div class="form-group">
+            <label for="title">Nama Kurir</label>
+            <input type="text" class="form-control" id="driver_name" name="driver_name" required>
         </div>
         <div class="form-group">
             <label for="username">Nomor HP</label>
-            <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+            <input type="text" class="form-control" id="driver_phone" name="driver_phone" required>
         </div>
         <div class="form-group">
             <label for="username">Email</label>
-            <input type="text" class="form-control" id="email" name="email" required>
+            <input type="text" class="form-control" id="driver_email" name="driver_email" required>
         </div>
         <div class="form-group">
         <label for="status">Status</label>
-            <select class="form-control" id="status" name="status">
-                <option value="Aktif">Aktif</option>
-                <option value="Tidak Aktif">Tidak Aktif</option>
+            <select class="form-control" id="driver_status" name="driver_status">
+                <option value="Active">Aktif</option>
+                <option value="TNon Active">Tidak Aktif</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
+        <button type="submit" class="btn btn-primary">Tambah Kurir</button>
         
     </form>
 

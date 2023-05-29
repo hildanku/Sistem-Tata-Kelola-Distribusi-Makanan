@@ -58,6 +58,11 @@
                     <span>Kelola Pelanggan</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('/admin/drivers') ?>">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Kelola Kurir</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
