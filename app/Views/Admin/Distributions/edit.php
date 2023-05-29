@@ -19,6 +19,14 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="username">Total Pembelian</label>
+            <input type="text" class="form-control" id="distribution_destination" name="distribution_destination" value="<?= $data['purchase_amount'] ?>" disabled>
+        </div>
+        <div class="form-group">
+            <label for="username">Total Bayar</label>
+            <input type="text" class="form-control" id="distribution_destination" name="distribution_destination" value="<?= $data['pay_amount'] ?>" disabled>
+        </div>
+        <div class="form-group">
             <label for="username">Alamat Distribusi</label>
             <input type="text" class="form-control" id="distribution_destination" name="distribution_destination" value="<?= $data['distribution_destination'] ?>" required>
         </div>

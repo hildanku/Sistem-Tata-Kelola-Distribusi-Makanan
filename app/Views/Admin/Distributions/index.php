@@ -19,6 +19,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama Kurir</th>
                         <th scope="col">Nama Produk</th>
+                        <th scope="col">Total Pembelian</th>
+                        <th scope="col">Total Bayar</th>
                         <th scope="col">Alamat Distribusi</th>
                         <th scope="col">Deskripsi Distribusi</th>
                         <th scope="col">Status Distribusi</th>     
@@ -45,6 +47,8 @@
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </td>
+                                <td><?= $data['purchase_amount'] ?></td>
+                                <td><?= $data['pay_amount'] ?></td>
                                 <td><?= $data['distribution_destination'] ?></td>
                                 <td><?= $data['distribution_description'] ?></td>
                                 <td><?= $data['distribution_progress'] ?></td>

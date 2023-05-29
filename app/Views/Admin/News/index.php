@@ -1,6 +1,7 @@
 <?= $this->extend('_partial/Master') ?>
 
 <?= $this->section('content') ?>
+
                 <div class="row">
                     <div class="container-fluid">
                     <a href="<?= base_url('admin/news/add') ?>" class="btn btn-outline-primary">Add</a>

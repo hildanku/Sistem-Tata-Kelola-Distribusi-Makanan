@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2023 at 03:08 PM
+-- Generation Time: May 29, 2023 at 06:06 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `newci`
+-- Database: `sitakesima`
 --
 
 -- --------------------------------------------------------
@@ -99,7 +99,9 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (8, '::1', 'siapanich01@gmail.com', 1, '2023-05-20 02:55:47', 1),
 (9, '::1', 'siapanich01@gmail.com', 1, '2023-05-24 11:53:04', 1),
 (10, '::1', 'siapanich01@gmail.com', 1, '2023-05-25 04:09:48', 1),
-(11, '::1', 'siapanich01@gmail.com', 1, '2023-05-26 12:42:48', 1);
+(11, '::1', 'siapanich01@gmail.com', 1, '2023-05-26 12:42:48', 1),
+(12, '::1', 'siapanich01@gmail.com', 1, '2023-05-27 02:21:21', 1),
+(13, '::1', 'siapanich01@gmail.com', 1, '2023-05-29 12:14:10', 1);
 
 -- --------------------------------------------------------
 
@@ -177,25 +179,36 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `uuid`, `shop_name`, `shop_owner`, `shop_address`, `phone_number`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(3, '646e0c611cbe4', 'Hildan Kusto_Shop', 'hildanku', 'Sempor KaliJawang', 456456, 'daad2@da.com', '', '2023-05-24 06:08:49', '2023-05-24 22:34:35'),
-(5, '646ef334ae6ff', 'HenryShop', 'Henry D', 'Jl. Kenangan No36 Cempaka Putih', 2147483647, 'henry@denata.com', '', '2023-05-24 22:33:40', '2023-05-24 22:33:40');
+(5, '646ef334ae6ff', 'HenryShop', 'Henry D', 'Jl. Kenangan No36 Cempaka Putih', 2147483647, 'henry@denata.com', '', '2023-05-24 22:33:40', '2023-05-24 22:33:40'),
+(7, '6474ba65b9a20', 'DNR.STORE', 'DinaRahma', 'TanjungBale', 2147483647, 'adsas@ca.com', '', '2023-05-29 07:44:53', '2023-05-29 07:44:53');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `distribution`
+-- Table structure for table `distributions`
 --
 
-CREATE TABLE `distribution` (
+CREATE TABLE `distributions` (
   `distribution_id` int(11) NOT NULL,
   `driver_id` int(5) NOT NULL,
   `product_id` int(5) NOT NULL,
   `distribution_description` text NOT NULL,
-  `distribution_destination` int(5) NOT NULL,
+  `distribution_destination` text NOT NULL,
+  `purchase_amount` varchar(36) NOT NULL,
+  `pay_amount` varchar(36) NOT NULL,
   `distribution_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
+  `distribution_progress` enum('diproses','dalam_perjalanan','batal','diterima','dikembalikan') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `distributions`
+--
+
+INSERT INTO `distributions` (`distribution_id`, `driver_id`, `product_id`, `distribution_description`, `distribution_destination`, `purchase_amount`, `pay_amount`, `distribution_datetime`, `distribution_progress`, `created_at`, `updated_at`) VALUES
+(5, 3, 1, 'dasdasdas', '0', '', '', '2023-05-03 14:08:00', 'diterima', '2023-05-29 07:08:47', '2023-05-29 07:08:47'),
+(6, 3, 1, 'dasdas', 'TanjungPinang', '', '', '2023-05-04 14:10:00', 'diproses', '2023-05-29 07:10:18', '2023-05-29 07:10:18');
 
 -- --------------------------------------------------------
 
@@ -218,23 +231,9 @@ CREATE TABLE `drivers` (
 --
 
 INSERT INTO `drivers` (`driver_id`, `driver_name`, `driver_phone`, `driver_email`, `driver_status`, `created_at`, `updated_at`) VALUES
-(1, 'Supriyadiono', '083124062506', 'Supriyadiono@aa.co', 'Active', '2023-05-25 06:26:19', '2023-05-25 06:26:19');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `drivers_bck`
---
-
-CREATE TABLE `drivers_bck` (
-  `driver_id` int(5) NOT NULL,
-  `driver_name` varchar(36) NOT NULL,
-  `driver_phone` varchar(36) NOT NULL,
-  `driver_email` varchar(36) NOT NULL,
-  `driver_status` enum('Active','Non Active') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(3, 'Hendro Gunawan', '08312220210', 'hildankutomo@gmail.com', 'Active', '2023-05-29 05:42:41', '2023-05-29 05:42:41'),
+(4, 'Ridwan Kurniawan', '083124062506', 'mencariarti@selamanyatakanberhenti.c', 'Active', '2023-05-29 08:25:00', '2023-05-29 08:25:00'),
+(5, 'Supriyadi', '08312220210', 'hildankutomo@gmail.com', 'Active', '2023-05-29 08:25:14', '2023-05-29 08:25:14');
 
 -- --------------------------------------------------------
 
@@ -279,7 +278,7 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `status`, `title`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'danger', 'Test Ubah', 'Ubah21njni1nokenghjgfh21klmne', '2023-05-19 09:42:19', '2023-05-19 02:42:19');
+(1, 'danger', 'Test', 'testing', '2023-05-29 15:16:43', '2023-05-29 08:16:43');
 
 -- --------------------------------------------------------
 
@@ -306,8 +305,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `category_id`, `product_made`, `product_expired`, `created_at`, `updated_at`) VALUES
 (1, 'Keju Mozzarela', 'Lezat Enak Bergizi', 26000, '5', 1, '2022-05-01', '2022-12-01', '2023-05-25 04:27:03', '2023-05-24 22:26:11'),
-(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '50', 1, '2023-12-01', '2029-12-12', '2023-05-24 22:36:03', '2023-05-24 22:36:23'),
-(11, 'asdas', 'sdasd', 12312, '2', 2, '421421', 'asdasd', '2023-05-24 23:08:51', '2023-05-24 23:08:51');
+(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '50', 1, '2023-12-01', '2029-12-12', '2023-05-24 22:36:03', '2023-05-24 22:36:23');
 
 -- --------------------------------------------------------
 
@@ -327,7 +325,7 @@ CREATE TABLE `products_category` (
 --
 
 INSERT INTO `products_category` (`category_id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'Makanan Tahan Lama', '2023-05-25 04:26:17', '2023-05-24 23:01:44'),
+(1, 'Makanan Tahan Lama', '2023-05-25 04:26:17', '2023-05-29 08:24:28'),
 (2, 'Vegetarian', '2023-05-25 04:50:36', '2023-05-25 04:50:36');
 
 -- --------------------------------------------------------
@@ -384,7 +382,7 @@ CREATE TABLE `webconfig` (
 --
 
 INSERT INTO `webconfig` (`id`, `app_logo`, `app_name`, `app_title`, `description`, `created_at`, `updated_at`) VALUES
-(1, '', 'SITAKESIMA', 'SITAKESIMA', '', '2023-05-12 01:10:47', '2023-05-24 22:31:17');
+(1, '', 'SITAKESIMA', 'SITAKESIMA::DASHBOARD', '', '2023-05-12 01:10:47', '2023-05-29 08:16:59');
 
 --
 -- Indexes for dumped tables
@@ -458,24 +456,17 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `distribution`
+-- Indexes for table `distributions`
 --
-ALTER TABLE `distribution`
+ALTER TABLE `distributions`
   ADD PRIMARY KEY (`distribution_id`),
   ADD KEY `driver_id` (`driver_id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `distribution_destination` (`distribution_destination`);
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `drivers`
 --
 ALTER TABLE `drivers`
-  ADD PRIMARY KEY (`driver_id`);
-
---
--- Indexes for table `drivers_bck`
---
-ALTER TABLE `drivers_bck`
   ADD PRIMARY KEY (`driver_id`);
 
 --
@@ -537,7 +528,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -561,25 +552,19 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `distribution`
+-- AUTO_INCREMENT for table `distributions`
 --
-ALTER TABLE `distribution`
-  MODIFY `distribution_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `distributions`
+  MODIFY `distribution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `driver_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `drivers_bck`
---
-ALTER TABLE `drivers_bck`
-  MODIFY `driver_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `driver_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -591,7 +576,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -603,7 +588,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products_category`
 --
 ALTER TABLE `products_category`
-  MODIFY `category_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -647,14 +632,6 @@ ALTER TABLE `auth_tokens`
 ALTER TABLE `auth_users_permissions`
   ADD CONSTRAINT `auth_users_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `auth_permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `auth_users_permissions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `distribution`
---
-ALTER TABLE `distribution`
-  ADD CONSTRAINT `distribution_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `drivers` (`driver_id`),
-  ADD CONSTRAINT `distribution_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
-  ADD CONSTRAINT `distribution_ibfk_3` FOREIGN KEY (`distribution_destination`) REFERENCES `customers` (`id`);
 
 --
 -- Constraints for table `products`

@@ -11,7 +11,7 @@ class DistributionModel extends Model
 
     protected $useAutoIncrement = true;
 
-    protected $allowedFields = ['driver_id', 'product_id', 'distribution_destination', 'distribution_datetime', 'distribution_description', 'distribution_progress'];
+    protected $allowedFields = ['driver_id', 'product_id', 'distribution_description', 'distribution_destination', 'purchase_amount', 'pay_amount', 'distribution_datetime', 'distribution_progress'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
