@@ -2,14 +2,21 @@
 
 <?= $this->section('content') ?>
     <?= form_open('admin/distribution/update/'.$data['distribution_id']) ?>
-
-        <div class="form-group">
-            <label for="title">Nama Kurir</label>
-            <input type="text" class="form-control" id="driver_id" name="driver_id"  value="<?= $data['shop_name'] ?>" required>
+    <div class="form-group">
+        <label for="status">Nama Kurir</label>
+            <select class="form-control" id="driver_id" name="driver_id" value="<?= $data['driver_id'] ?>">
+                <?php foreach($getDrivers as $key => $driver) : ?>
+                <option value="<?= $driver['driver_id'] ?>"><?= $driver['driver_name'] ?></option>
+                <?php endforeach  ?> 
+            </select>
         </div>
         <div class="form-group">
-            <label for="username">Nama Produk</label>
-            <input type="text" class="form-control" id="product_id" name="product_id" value="<?= $data['product_id'] ?>" required>
+        <label for="status">Nama Produk</label>
+            <select class="form-control" id="product_id" name="product_id" value="<?= $data['product_id'] ?>">
+                <?php foreach($getProducts as $key => $product) : ?>
+                <option value="<?= $product['product_id'] ?>"><?= $product['product_name'] ?></option>
+                <?php endforeach  ?> 
+            </select>
         </div>
         <div class="form-group">
             <label for="username">Alamat Distribusi</label>
@@ -17,7 +24,7 @@
         </div>
         <div class="form-group">
             <label for="username">Waktu Tanggal Distribusi</label>
-            <input type="text" class="form-control" id="distribution_datetime" name="distribution_datetime" value="<?= $data['distribution_datetime'] ?>" required>
+            <input type="datetime-local" class="form-control" id="distribution_datetime" name="distribution_datetime" value="<?= $data['distribution_datetime'] ?>" required>
         </div>
         <div class="form-group">
             <label for="username">Deskripsi Distribusi</label>
@@ -28,8 +35,8 @@
             <select class="form-control" id="distribution_progress" name="distribution_progress" value="<?= $data['distribution_progress'] ?>">
                 <option value="diproses">Sedang Diproses</option>
                 <option value="dalam_perjalanan">Dalam Perjalanan</option>
-                <option value="diterima">Diterima</option>
-                <option value="batal">Batal</option>
+                <option value="batal">Diterima</option>
+                <option value="diterima">Batal</option>
                 <option value="dikembalikan">Dikembalikan</option>
             </select>
         </div>

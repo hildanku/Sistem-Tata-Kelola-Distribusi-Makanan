@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CustomerModel extends Model
+class DistributionModel extends Model
 {
-    protected $table      = 'distribution';
+    protected $table      = 'distributions';
     protected $primaryKey = 'distribution_id';
 
     protected $useAutoIncrement = true;

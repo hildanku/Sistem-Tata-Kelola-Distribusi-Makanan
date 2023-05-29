@@ -30,8 +30,20 @@
                          <?php foreach($getData as $key => $data) : ?>
                             <tr>
                                 <th scope="row"><?= $data['distribution_id'] ?></th>
-                                <td><?= $data['driver_id'] ?></td>
-                                <td><?= $data['product_id'] ?></td>
+                                <td>
+                                    <?php foreach ($getDrivers as $driver) : ?>
+                                        <?php if ($driver['driver_id'] === $data['driver_id']) : ?>
+                                            <?= $driver['driver_name'] ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($getProducts as $product) : ?>
+                                        <?php if ($product['product_id'] === $data['product_id']) : ?>
+                                            <?= $product['product_name'] ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </td>
                                 <td><?= $data['distribution_destination'] ?></td>
                                 <td><?= $data['distribution_datetime'] ?></td>
                                 <td><?= $data['distribution_description'] ?></td>

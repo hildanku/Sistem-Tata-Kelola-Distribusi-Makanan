@@ -71,6 +71,13 @@ $routes->group('admin', function($routes) {
     $routes->get('driver/edit/(:segment)', 'Driver::edit/$1');
     $routes->post('driver/update/(:segment)', 'Driver::update/$1');
     $routes->delete('driver/delete/(:segment)', 'Driver::delete/$1');
+    // distribution
+    $routes->get('distributions', 'Distribution::index');
+    $routes->get('distribution/add', 'Distribution::add');
+    $routes->post('distribution/store', 'Distribution::store');
+    $routes->get('distribution/edit/(:segment)', 'Distribution::edit/$1');
+    $routes->post('distribution/update/(:segment)', 'Distribution::update/$1');
+    $routes->delete('distribution/delete/(:segment)', 'Distribution::delete/$1');
 });
 //$routes->get('news', 'News::index');
 
