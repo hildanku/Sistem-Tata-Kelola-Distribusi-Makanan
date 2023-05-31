@@ -42,6 +42,7 @@ class Distribution extends BaseController
     }
     public function add()
     {
+      
         $config = $this->webconfigM->first();
         $getDrivers = $this->driverM->findAll();
         $getProducts = $this->productM->findAll();
@@ -55,18 +56,44 @@ class Distribution extends BaseController
     }
     public function store()
     {
+      // tangkap dari AJAX
+        $productId = $this->request->getPost('product_id');
+        $purchaseAmount = $this->request->getPost('purchase_amount');
+
+        // Ambil data produk berdasarkan product_id
+        $getData = $this->productM->find($productId);
+
+           // Cek apakah jumlah yang dibeli melebihi product_quantity
+         if ($purchaseAmount > $getData['product_quantity']) {
+      // Jika melebihi, tampilkan pesan error dan kembalikan pengguna ke halaman sebelumnya
+            session()->setFlashdata('error', 'Order gagal, pembelian melebihi stock.');
+            return redirect()->back();
+        }
+
+        $productPrice = $getData['product_price'];
+        $productQuantity = $getData['product_quantity'];
+        // Hitung total harga
+        $payAmount = $purchaseAmount * $productPrice;
+        $quantity = $productQuantity - $purchaseAmount;
+        // update quantity barang
+        $this->productM->update($productId,['product_quantity' => $quantity]);
+    
         $data = [
             'driver_id' => $this->request->getPost('driver_id'),
-            'product_id' => $this->request->getPost('product_id'),
+            'product_id' => $productId,
+            'purchase_amount' => $purchaseAmount,
+            'pay_amount' => $payAmount, // Set nilai 'pay_amount' berdasarkan perhitungan di atas
             'distribution_destination' => $this->request->getPost('distribution_destination'),
             'distribution_datetime' => $this->request->getPost('distribution_datetime'),
             'distribution_description' => $this->request->getPost('distribution_description'),
             'distribution_progress' => $this->request->getPost('distribution_progress')
         ];
+    
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
         $this->distributionM->save($data);
         return redirect()->to('/admin/distributions');
     }
+    
     public function edit($distribution_id)
     {
         helper('form');
@@ -85,6 +112,16 @@ class Distribution extends BaseController
     }
     public function update($distribution_id)
     {
+
+      // $productId = $this->request->getPost('product_id');
+      // $getDistributionProgress = $this->request->getPost('distribution_progress');
+
+      // $getData = $this->productM->find($productId);
+
+      // $distributionProgress = $getData['distribution_progress'];
+
+      // if ($distributionProgress )
+
         $data = [
             'driver_id' => $this->request->getPost('driver_id'),
             'product_id' => $this->request->getPost('product_id'),
@@ -105,5 +142,15 @@ class Distribution extends BaseController
         }
         $this->distributionM->where('distribution_id', $distribution_id)->delete();
         return $this->response->setJSON(['success' => true]);
+    }
+    public function getProductData($product_id)
+    {
+      $product = $this->productM->find($product_id);
+
+      if (!$product) {
+        return $this->response->setJSON(['success' => false]);
+      }
+
+      return $this->response->setJSON($product);
     }
 }

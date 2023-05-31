@@ -19,6 +19,31 @@
             </select>
         </div>
         <div class="form-group">
+            <div class="card">
+                <div class="card-body bg-success text-white">
+                <h5> Detail Produk</h5>
+                <span> Harga :   <div id="product_price"></div> </span>
+                <span> Jumlah Stock :   <div id="product_quantity"></div> </span>
+                <span> Deskripsi :   <div id="product_description"></div> </span>
+                </div>
+            </div>
+        </div>
+               <!-- Error message display -->
+        <?php if (session()->has('error')) : ?>
+        <div class="alert alert-danger" role="alert">
+             <?= session('error') ?>
+        </div>
+        <?php endif ?>
+
+        <div class="form-group">
+            <label for="username">Jumlah Pembelian</label>
+            <input type="number" class="form-control" id="purchase_amount" name="purchase_amount" required>
+        </div>  
+        <div class="form-group">
+            <label for="username">Total Harga</label>
+            <input type="text" class="form-control" id="pay_amount" name="pay_amount" disabled>
+        </div>
+        <div class="form-group">
             <label for="username">Alamat Distribusi</label>
             <input type="text" class="form-control" id="distribution_destination" name="distribution_destination" required>
         </div>
@@ -43,5 +68,34 @@
         <button type="submit" class="btn btn-primary">Tambah Distribusi</button>
         
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+  $('#product_id').change(function() {
+    var productId = $(this).val();
+    $.ajax({
+      url: '<?= base_url('admin/distribution/getProductData') ?>/' + productId,
+      method: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        $('#product_price').html(response.product_price);
+        $('#product_quantity').html(response.product_quantity);
+        $('#product_description').html(response.product_description);
+        // Melempar data lainnya ke elemen HTML yang sesuai
+      }
+    });
+  });
+});
+</script>
+<script>
+$(document).ready(function() {
+  $('#purchase_amount').on('input', function() {
+    var purchaseAmount = $(this).val();
+    var productPrice = $('#product_price').text();
+    var totalPrice = purchaseAmount * productPrice;
+    $('#pay_amount').val(totalPrice);
+  });
+});
 
+</script>
 <?= $this->endSection() ?>

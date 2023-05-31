@@ -78,6 +78,7 @@ $routes->group('admin', function($routes) {
     $routes->get('distribution/edit/(:segment)', 'Distribution::edit/$1');
     $routes->post('distribution/update/(:segment)', 'Distribution::update/$1');
     $routes->delete('distribution/delete/(:segment)', 'Distribution::delete/$1');
+    $routes->get('distribution/getProductData/(:segment)', 'Distribution::getProductData/$1');
 });
 //$routes->get('news', 'News::index');
 
