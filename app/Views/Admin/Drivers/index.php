@@ -1,67 +1,60 @@
 <?= $this->extend('_partial/Master') ?>
-
 <?= $this->section('content') ?>
-<div class="row">
-                    <div class="container-fluid">
-                    <a href="<?= base_url('admin/driver/add') ?>" class="btn btn-outline-primary">Add</a>
+                    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Kurir</li>
+                        </ol>
+                        
+                    </nav>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Kelola Kurir</h6>
+                        </div>
+                        <?php if (session()->has('success')) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session('success') ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama Kurir</th>
+                                        <th scope="col">Nomor HP</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aksi</th>                             
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <?php foreach($getData as $key => $data) : ?>
+                                        <tr>
+                                            <th scope="row"><?= $data['driver_id'] ?></th>
+                                            <td><?= $data['driver_name'] ?></td>
+                                            <td><?= $data['driver_phone'] ?></td>
+                                            <td><?= $data['driver_email'] ?></td>
+                                            <td><?= $data['driver_status'] ?></td>   
+                                            <td>
+                                                <a href="<?= base_url('admin/driver/edit/'.$data['driver_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                                <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['driver_id'] ?>" data-toggle="modal" data-target="#deleteModal">
+                                                    Hapus
+                                                </button>
+                                             </td>
+                                    </tr>
+                                    <?php endforeach   ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="<?= base_url('admin/driver/add') ?>" class="btn btn-primary btn-sm">
+                            <span class="text">Tambah Kurir</span>
+                        </a>
                     </div>
                 </div>
-                <br>
-                   <?php if (session()->has('success')) : ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?= session('success') ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif; ?>
-                <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama Kurir</th>
-                        <th scope="col">Nomor HP</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Aksi</th>                             
-                    </tr>
-                </thead>
-                <tbody>
-                         <?php foreach($getData as $key => $data) : ?>
-                            <tr>
-                                <th scope="row"><?= $data['driver_id'] ?></th>
-                                <td><?= $data['driver_name'] ?></td>
-                                <td><?= $data['driver_phone'] ?></td>
-                                <td><?= $data['driver_email'] ?></td>
-                                <td><?= $data['driver_status'] ?></td>   
-                                <td>
-                                    <a href="<?= base_url('admin/driver/edit/'.$data['driver_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
-                                    <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['driver_id'] ?>" data-toggle="modal" data-target="#deleteModal">
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach   ?>
-                </tbody>
-                </table>
-                <!---                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit data //</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Apakah Anda yakin ingin menghapus data ini?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                <button type="button" class="btn btn-danger btn-ok">Ya</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
