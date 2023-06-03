@@ -43,8 +43,8 @@
             <select class="form-control" id="distribution_progress" name="distribution_progress" value="<?= $data['distribution_progress'] ?>">
                 <option value="diproses">Sedang Diproses</option>
                 <option value="dalam_perjalanan">Dalam Perjalanan</option>
-                <option value="batal">Diterima</option>
-                <option value="diterima">Batal</option>
+                <option value="diterima">Diterima</option>
+                <option value="batal">Batal</option>
                 <option value="dikembalikan">Dikembalikan</option>
             </select>
         </div>

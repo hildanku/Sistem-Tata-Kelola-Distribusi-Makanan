@@ -112,15 +112,25 @@ class Distribution extends BaseController
     }
     public function update($distribution_id)
     {
-
       // $productId = $this->request->getPost('product_id');
       // $getDistributionProgress = $this->request->getPost('distribution_progress');
-
       // $getData = $this->productM->find($productId);
-
-      // $distributionProgress = $getData['distribution_progress'];
-
+      // $distributionProgress = $getData['distribution_progress']
       // if ($distributionProgress )
+
+        $distribution = $this->distributionM->find($distribution_id);
+        $oldProgress = $distribution['distribution_progress'];
+        $newProgress = $this->request->getPost('distribution_progress');
+
+        if ($oldProgress != $newProgress && $newProgress == 'batal' || $newProgress == 'dikembalikan'){
+
+          $productId = $distribution['product_id'];
+          $productQuantity = $this->productM->find($productId)['product_quantity'];
+          $purchaseAmount = $distribution['purchase_amount'];
+          $newQuantity = $productQuantity + $purchaseAmount;
+          $this->productM->where('product_id',$productId)->set('product_quantity', $newQuantity)->update();
+
+        }
 
         $data = [
             'driver_id' => $this->request->getPost('driver_id'),

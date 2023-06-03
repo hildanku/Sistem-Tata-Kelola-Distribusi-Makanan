@@ -61,10 +61,15 @@
                                             <td><?= $data['distribution_progress'] ?></td>
                                             <td><?= $data['distribution_datetime'] ?></td>
                                             <td>
+                                                <?php if ($data['distribution_progress'] != 'batal' && $data['distribution_progress'] != 'dikembalikan' && $data['distribution_progress'] != 'diterima') : ?>
                                                 <a href="<?= base_url('admin/distribution/edit/'.$data['distribution_id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
                                                 <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['distribution_id'] ?>" data-toggle="modal" data-target="#deleteModal">
                                                     Hapus
                                                 </button>
+                                                <?php else: ?>
+                                                <button class="btn btn-outline-info btn-sm" disabled>Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm" disabled>Hapus</button>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach   ?>
