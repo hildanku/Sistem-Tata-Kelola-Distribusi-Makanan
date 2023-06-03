@@ -7,7 +7,7 @@ use App\Models\NewsModel;
 
 class News extends BaseController
 {
-    protected $webconfig;
+    protected $webconfigM;
     protected $newsM;
 
     public function __construct()

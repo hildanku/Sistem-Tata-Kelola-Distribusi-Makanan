@@ -40,6 +40,7 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
+                        <a class="collapse-item" href="<?= base_url('/admin/users') ?>">Kelola Users</a>
                         <a class="collapse-item" href="<?= base_url('/admin/news') ?>">Kelola Berita</a>
                         <a class="collapse-item" href="<?= base_url('/admin/webconfig') ?>">Konfigurasi Website</a>
                     </div>

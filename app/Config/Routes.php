@@ -79,6 +79,13 @@ $routes->group('admin', function($routes) {
     $routes->post('distribution/update/(:segment)', 'Distribution::update/$1');
     $routes->delete('distribution/delete/(:segment)', 'Distribution::delete/$1');
     $routes->get('distribution/getProductData/(:segment)', 'Distribution::getProductData/$1');
+    // user
+    $routes->get('users', 'User::index');
+    $routes->get('user/add', 'User::add');
+    $routes->post('user/store', 'User::store');
+    $routes->get('user/edit/(:segment)', 'User::edit/$1');
+    $routes->post('user/update/(:segment)', 'User::update/$1');
+    $routes->delete('user/delete/(:segment)', 'User::delete/$1');
 });
 //$routes->get('news', 'News::index');
 
