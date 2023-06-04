@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="username">Password</label>
-            <input type="text" class="form-control" id="password" name="password" required>
+            <input type="text" class="form-control" id="password_hash" name="password_hash" required>
         </div>
         <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
     </form>
