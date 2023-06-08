@@ -44,7 +44,7 @@
                                             <td><?= $data->created_at ?></td>
                                             <td><?= $data->updated_at ?></td>
                                             <td>
-                                                <a href="<?= base_url('admin/product/edit/'.$data->id) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                                <a href="<?= base_url('admin/user/edit/'.$data->id) ?>" class="btn btn-outline-info btn-sm">Edit</a>
                                                 <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data->id ?>" data-toggle="modal" data-target="#deleteModal">
                                                     Hapus
                                                 </button>
@@ -89,7 +89,7 @@
                 $(document).on('click', '.btn-ok', function () {
                     var uuid = $(this).data('uuid');
                     $.ajax({
-                        url: '<?= base_url('admin/product/delete') ?>/' + uuid,
+                        url: '<?= base_url('admin/user/delete') ?>/' + uuid,
                         type: 'DELETE',
                         success: function (data) {
                             if (data.success) {

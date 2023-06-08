@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\WebConfigModel;  
-use App\Models\UserModel;  
+    use App\Entities\UserEnt;
+use Myth\Auth\Models\UserModel;  
 
 class User extends BaseController
 {
@@ -41,11 +43,25 @@ class User extends BaseController
             'email' => $this->request->getPost('email'),
             'fullname' => $this->request->getPost('fullname'),
             'username' => $this->request->getPost('username'),
-            'password' => $this->request->getPost('password'),
+            'password_hash' => $this->request->getPost('password_hash'),
+            'active' => 1,
         ];
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->userM->save($data);
-        return redirect()->to('/admin/users');
+        
+        $data = new UserEnt($data);
+        ob_start();
+        dd($data);
+        $dataDump = ob_get_clean();
+        
+        if ($this->userM->withGroup('administrator')->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil disimpan!' . $dataDump);
+            return redirect()->to('/admin/users');
+        } else {
+            session()->setFlashdata('error', 'Data gagal disimpan!');
+            return redirect()->to('/admin/users');
+        }
+        // session()->setFlashdata('success', 'Data berhasil ditambahkan.');
+        // $this->userM->save($data);
+        // return redirect()->to('/admin/users');
     }
     public function edit($id)
     {
@@ -53,35 +69,61 @@ class User extends BaseController
         $config = $this->webconfigM->first();
         $data = $this->userM->where('id', $id)->first();
       
-        return view('Admin/Products/edit', [
+        return view('Admin/Users/edit', [
             'data' => $data,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
         ]);
     }
-    public function update($product_id)
+    public function update($id)
     {
-
         $data = [
-            'product_name' => $this->request->getPost('product_name'),
-            'product_description' => $this->request->getPost('product_description'),
-            'product_price' => $this->request->getPost('product_price'),
-            'product_quantity' => $this->request->getPost('product_quantity'),
-            'category_id' => $this->request->getPost('category_id'),
-            'product_made' => $this->request->getPost('product_made'),
-            'product_expired' => $this->request->getPost('product_expired'),
+            'email' => $this->request->getPost('email'),
+            'fullname' => $this->request->getPost('fullname'),
+            'username' => $this->request->getPost('username'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->productM->where('product_id', $product_id)->set($data)->update();
-        return redirect()->to('/admin/products');
+    
+        if ($this->userM->where('id', $id)->set($data)->update()) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/users');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/users');
+        }
     }
-    public function delete($product_id)
+    
+    // public function update($id)
+    // {
+    //     $data = [
+    //         'email' => $this->request->getPost('email'),
+    //         'fullname' => $this->request->getPost('fullname'),
+    //         'username' => $this->request->getPost('username'),
+    //         'password_hash' => $this->request->getPost('password_hash'),
+    //         // 'active' => 1,
+    //     ];
+    
+    //     $this->userM->where('id', $id)->set($data)->update();
+        
+    //     session()->setFlashdata('success', 'Data berhasil diupdate.');
+    //     return redirect()->to('/admin/users');
+    // }
+    public function delete($id)
     {
-        $data = $this->productM->where('product_id', $product_id)->first();
+        $data = $this->userM->where('id', $id)->first();
         if (!$data) {
             return $this->response->setJSON(['success' => false]);
         }
-        $this->productM->where('product_id', $product_id)->delete();
+        $this->userM->where('id', $id)->delete();
         return $this->response->setJSON(['success' => true]);
     }
 }
+       /*
+       problem :          $this->userM->where('id', $id)->set($data)->update();
+        Kesalahan yang terjadi adalah karena metode set() dari CodeIgniter Model membutuhkan array sebagai argumen, bukan objek.
+         Anda mencoba memberikan objek UserEnt ke metode set(), yang menyebabkan kesalahan tipe data (TypeError).
+        Untuk memperbaiki kesalahan tersebut, Anda dapat mengubah objek UserEnt menjadi array sebelum menggunakan metode set(). 
+        Berikut adalah perubahan yang perlu dilakukan pada baris 86:
+        
+        Dengan menggunakan metode toArray() dari objek UserEnt, Anda dapat mengonversinya menjadi array yang dapat diterima oleh metode set().
+         Setelah perubahan tersebut, kode seharusnya tidak lagi menghasilkan kesalahan "TypeError: Illegal offset type"
+        */
