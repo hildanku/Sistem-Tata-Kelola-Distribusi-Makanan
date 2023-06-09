@@ -1,7 +1,7 @@
 <?php $this->extend('_partial/Master.php') ?>
 
 <?= $this->section('content') ?>
-    <?= form_open('admin/customer/update/'.$data['uuid']) ?>
+    <?= form_open('admin/customer/update/'.$data['id']) ?>
 
     <div class="form-group">
             <label for="title">Nama Toko</label>

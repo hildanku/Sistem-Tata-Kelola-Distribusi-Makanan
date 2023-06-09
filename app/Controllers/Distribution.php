@@ -31,9 +31,9 @@ class Distribution extends BaseController
         $getData = $this->distributionM->findAll();
       
         return view('Admin/Distributions/index', [
-        'getDrivers' => $getDrivers,
-        'getProducts' => $getProducts,
-        'getData' => $getData,
+          'getDrivers' => $getDrivers,
+          'getProducts' => $getProducts,
+          'getData' => $getData,
           'config' => $config,
           'appTitle' => $config['app_title'],
           'appName' => $config['app_name']
@@ -42,7 +42,6 @@ class Distribution extends BaseController
     }
     public function add()
     {
-      
         $config = $this->webconfigM->first();
         $getDrivers = $this->driverM->findAll();
         $getProducts = $this->productM->findAll();
@@ -89,9 +88,13 @@ class Distribution extends BaseController
             'distribution_progress' => $this->request->getPost('distribution_progress')
         ];
     
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->distributionM->save($data);
-        return redirect()->to('/admin/distributions');
+        if ($this->distributionM->save($data)){
+          session()->setFlashdata('success', 'Data berhasil ditambahkan.');
+          return redirect()->to('/admin/distributions');
+        } else {
+            session()->setFlashdata('error', 'Data gagal ditambahkan!');
+            return redirect()->to('/admin/distributions');
+        }
     }
     
     public function edit($distribution_id)
@@ -140,9 +143,13 @@ class Distribution extends BaseController
             'distribution_description' => $this->request->getPost('distribution_description'),
             'distribution_progress' => $this->request->getPost('distribution_progress')
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->distributionM->where('distribution_id', $distribution_id)->set($data)->update();
-        return redirect()->to('/admin/distributions');
+        if ($this->distributionM->where('distribution_id', $distribution_id)->set($data)->update()) {
+          session()->setFlashdata('success', 'Data berhasil diperbarui!');
+          return redirect()->to('/admin/distributions');
+      } else {
+          session()->setFlashdata('error', 'Data gagal diperbarui!');
+          return redirect()->to('/admin/distributions');
+      }
     }
     public function delete($distribution_id)
     {

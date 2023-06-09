@@ -43,9 +43,13 @@ class ProductCategory extends BaseController
         $data = [
             'category_name' => $this->request->getPost('category_name')
         ];
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->productcatM->save($data);
-        return redirect()->to('/admin/product/category');
+        if ($this->productcatM->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/users');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/users');
+        }
     }
     public function edit($category_id)
     {
@@ -62,13 +66,16 @@ class ProductCategory extends BaseController
     }
     public function update($category_id)
     {
-        $model = new ProductCategoryModel();
         $data = [
             'category_name' => $this->request->getPost('category_name'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $model->where('category_id', $category_id)->set($data)->update();
-        return redirect()->to('/admin/product/category');
+        if ($this->productCatM->where('id', $id)->set($data)->update()) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/product/category');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/product/category');
+        }
     }
     public function delete($category_id)
     {

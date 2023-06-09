@@ -42,8 +42,8 @@
                                                     <td><?= $data['phone_number'] ?></td>
                                                     <td><?= $data['email'] ?></td>
                                                     <td>
-                                                        <a href="<?= base_url('admin/customer/edit/'.$data['uuid']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
-                                                        <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['uuid'] ?>" data-toggle="modal" data-target="#deleteModal">
+                                                        <a href="<?= base_url('admin/customer/edit/'.$data['id']) ?>" class="btn btn-outline-info btn-sm">Edit</a>
+                                                        <button class="btn btn-outline-danger btn-sm delete" data-uuid="<?= $data['id'] ?>" data-toggle="modal" data-target="#deleteModal">
                                                             Hapus
                                                         </button>
                                                     </td>

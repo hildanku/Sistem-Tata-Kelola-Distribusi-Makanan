@@ -38,7 +38,6 @@ class Customer extends BaseController
     public function store()
     {
       $data = [
-          'uuid' => uniqid(),
           'shop_name' => $this->request->getPost('shop_name'),
           'shop_owner' => $this->request->getPost('shop_owner'),
           'shop_address' => $this->request->getPost('shop_address'),
@@ -46,17 +45,22 @@ class Customer extends BaseController
           'email' => $this->request->getPost('email'),
           'status' => $this->request->getPost('status'),
       ];
-      session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-      $this->customerM->save($data);
-      return redirect()->to('/admin/customers');
+
+      if ($this->customerM->save($data)){
+        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
+        return redirect()->to('/admin/customers');
+      } else {
+          session()->setFlashdata('error', 'Data gagal ditambahkan!');
+          return redirect()->to('/admin/customers');
+      }
     }
 
-    public function edit($uuid)
+    public function edit($id)
     {
       helper('form');
 
       $config = $this->webconfigM->first();
-      $data = $this->customerM->where('uuid', $uuid)->first();
+      $data = $this->customerM->where('id', $id)->first();
       
       return view('Admin/Customers/edit', [
         'data' => $data,
@@ -65,7 +69,7 @@ class Customer extends BaseController
       ]);
     }
 
-    public function update($uuid)
+    public function update($id)
     {
         $data = [
           'shop_name' => $this->request->getPost('shop_name'),
@@ -75,17 +79,23 @@ class Customer extends BaseController
           'email' => $this->request->getPost('email'),
           'status' => $this->request->getPost('status'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->customerM->where('uuid', $uuid)->set($data)->update();
-        return redirect()->to('/admin/customers');
+
+        if ($this->customerM->where('id', $id)->set($data)->update()) {
+          session()->setFlashdata('success', 'Data berhasil diperbarui!');
+          return redirect()->to('/admin/customers');
+        } else {
+          session()->setFlashdata('error', 'Data gagal diperbarui!');
+          return redirect()->to('/admin/customers');
+        }
+
     }
-    public function delete($uuid)
+    public function delete($id)
     {
-      $data = $this->customerM->where('uuid', $uuid)->first();
+      $data = $this->customerM->where('id', $id)->first();
         if (!$data) {
             return $this->response->setJSON(['success' => false]);
         }
-        $this->customerM->where('uuid', $uuid)->delete();
+        $this->customerM->where('id', $id)->delete();
         return $this->response->setJSON(['success' => true]);
     }
 

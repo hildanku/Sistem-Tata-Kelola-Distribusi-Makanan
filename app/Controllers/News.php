@@ -41,9 +41,13 @@ class News extends BaseController
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->newsM->save($data);
-        return redirect()->to('/admin/news');
+        if ($this->newsM->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/news');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/news');
+        }
     }
     public function edit($id)
     {
@@ -64,9 +68,13 @@ class News extends BaseController
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->newsM->where('id', $id)->set($data)->update();
-        return redirect()->to('/admin/news');
+     if ($this->newsM->where('id', $id)->set($data)->update()) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/news');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/news');
+        }
     }
     public function delete($id)
     {

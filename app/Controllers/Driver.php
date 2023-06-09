@@ -45,9 +45,13 @@ class Driver extends BaseController
             'driver_email' => $this->request->getPost('driver_email'),
             'driver_status' => $this->request->getPost('driver_status'),
         ];
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->driverM->save($data);
-        return redirect()->to('/admin/drivers');
+        if ($this->driverM->save($data)) {
+          session()->setFlashdata('success', 'Data berhasil diperbarui!');
+          return redirect()->to('/admin/drivers');
+      } else {
+          session()->setFlashdata('error', 'Data gagal diperbarui!');
+          return redirect()->to('/admin/drivers');
+      }
     }
     public function edit($driver_id)
     {
@@ -68,9 +72,13 @@ class Driver extends BaseController
           'driver_email' => $this->request->getPost('driver_email'),
           'driver_status' => $this->request->getPost('driver_status'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->driverM->where('driver_id', $driver_id)->set($data)->update();
-        return redirect()->to('/admin/drivers');
+        if ($this->driverM->where('driver_id', $driver_id)->set($data)->update()) {
+          session()->setFlashdata('success', 'Data berhasil diperbarui!');
+          return redirect()->to('/admin/drivers');
+      } else {
+          session()->setFlashdata('error', 'Data gagal diperbarui!');
+          return redirect()->to('/admin/drivers');
+      }
     }
     public function delete($driver_id)
     {

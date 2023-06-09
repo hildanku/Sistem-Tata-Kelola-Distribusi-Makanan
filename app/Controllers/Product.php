@@ -54,9 +54,13 @@ class Product extends BaseController
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        $this->productM->save($data);
-        return redirect()->to('/admin/products');
+        if ($this->productM->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/products');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/products');
+        }
     }
     public function edit($product_id)
     {
@@ -84,9 +88,13 @@ class Product extends BaseController
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];
-        session()->setFlashdata('success', 'Data berhasil diupdate.');
-        $this->productM->where('product_id', $product_id)->set($data)->update();
-        return redirect()->to('/admin/products');
+        if ($this->productM->where('product_id', $product_id)->set($data)->update()) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to('/admin/products');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/products');
+        }
     }
     public function delete($product_id)
     {
