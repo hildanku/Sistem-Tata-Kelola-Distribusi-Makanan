@@ -55,7 +55,7 @@ class User extends BaseController
             session()->setFlashdata('success', 'Data berhasil ditambahkan.');
             return redirect()->to('/admin/users');
         } else {
-            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            session()->setFlashdata('error', 'Data gagal ditambahkan!');
             return redirect()->to('/admin/users');
         }
     }
