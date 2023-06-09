@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\WebConfigModel;  
-// use App\Entities\User as UserEntity;
+use App\Entities\User as UserEntity;
 use App\Models\UserModel;  
 
 class User extends BaseController
@@ -44,22 +44,20 @@ class User extends BaseController
             'fullname' => $this->request->getPost('fullname'),
             'username' => $this->request->getPost('username'),
             'password_hash' => $this->request->getPost('password_hash'),
-            'active' => 1,
+            'active' => 1,        
         ];
-        
-        // $data = new User($data);
-        
-        // if ($this->userM->withGroup('administrator')->save($data)) {
-        //     session()->setFlashdata('success', 'Data berhasil disimpan!');
-        //     return redirect()->to('/admin/users');
-        // } else {
-        //     session()->setFlashdata('error', 'Data gagal disimpan!');
-        //     return redirect()->to('/admin/users');
-        // }
 
-        $this->userM->save($data);
-        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        return redirect()->to('/admin/users');
+        $users = new UserEntity();
+        $users->fill($data);
+        $users->setPassword($data['password_hash']);
+    
+        if ($this->userM->save($users)){
+            session()->setFlashdata('success', 'Data berhasil ditambahkan.');
+            return redirect()->to('/admin/users');
+        } else {
+            session()->setFlashdata('error', 'Data gagal diperbarui!');
+            return redirect()->to('/admin/users');
+        }
     }
     public function edit($id)
     {
@@ -79,6 +77,8 @@ class User extends BaseController
             'email' => $this->request->getPost('email'),
             'fullname' => $this->request->getPost('fullname'),
             'username' => $this->request->getPost('username'),
+            'password_hash' => $this->request->getPost('password_hash'),
+            'active' => $this->request->getPost('active'),
         ];
     
         if ($this->userM->where('id', $id)->set($data)->update()) {
@@ -90,21 +90,6 @@ class User extends BaseController
         }
     }
     
-    // public function update($id)
-    // {
-    //     $data = [
-    //         'email' => $this->request->getPost('email'),
-    //         'fullname' => $this->request->getPost('fullname'),
-    //         'username' => $this->request->getPost('username'),
-    //         'password_hash' => $this->request->getPost('password_hash'),
-    //         // 'active' => 1,
-    //     ];
-    
-    //     $this->userM->where('id', $id)->set($data)->update();
-        
-    //     session()->setFlashdata('success', 'Data berhasil diupdate.');
-    //     return redirect()->to('/admin/users');
-    // }
     public function delete($id)
     {
         $data = $this->userM->where('id', $id)->first();

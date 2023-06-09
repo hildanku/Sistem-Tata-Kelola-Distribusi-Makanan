@@ -19,9 +19,11 @@
             <label for="username">Password</label>
             <input type="text" class="form-control" id="password_hash" name="password_hash" value="<?= $data->password_hash ?>" required>
         </div>
-        <div class="form-group">
-            <label for="username">Status Akun</label>
-            <input type="text" class="form-control" id="active" name="active" value="<?= $data->active ?>" required>
+        <label for="status">Status Akun</label>
+            <select class="form-control" id="active" name="active" value="<?= $data->active ?>">
+                <option value="1">Aktif</option>
+                <option value="0">Non Aktifkan</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Edit Pengguna</button>
