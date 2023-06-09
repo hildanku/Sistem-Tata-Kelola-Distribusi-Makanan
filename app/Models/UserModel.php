@@ -3,32 +3,31 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
- use Faker\Generator;
+use Faker\Generator;
 use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Entities\User;
 
-/**
+/** 
  * @method User|null first()
  */
 class UserModel extends Model
 {
     protected $table          = 'users';
     protected $primaryKey     = 'id';
-   
-    protected $useAutoIncrement = true;
-
-    protected $returnType     = User::class;
+    protected $returnType     = 'App\Entities\User';
     protected $useSoftDeletes = false;
     protected $allowedFields  = [
         'email', 'fullname', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash',
-        'status', 'status_message', 'active', 'force_pass_reset', 'deleted_at',
+        'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
     ];
     protected $useTimestamps   = true;
-    
     protected $validationRules = [
-        'email'         => 'required|valid_email|',
+        'email'         => 'required',
+        //|valid_email|is_unique[users.email,id,{id}]
+        'fullname'         => 'required',
         'username'      => 'required',
         'password_hash' => 'required',
+        //|alpha_numeric_punct|min_length[3]|max_length[30]|is_unique[users.username,id,{id}]
     ];
     protected $validationMessages = [];
     protected $skipValidation     = false;

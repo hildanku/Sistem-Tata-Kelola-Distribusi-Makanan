@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\WebConfigModel;  
-    use App\Entities\UserEnt;
-use Myth\Auth\Models\UserModel;  
+// use App\Entities\User as UserEntity;
+use App\Models\UserModel;  
 
 class User extends BaseController
 {
@@ -47,21 +47,19 @@ class User extends BaseController
             'active' => 1,
         ];
         
-        $data = new UserEnt($data);
-        ob_start();
-        dd($data);
-        $dataDump = ob_get_clean();
+        // $data = new User($data);
         
-        if ($this->userM->withGroup('administrator')->save($data)) {
-            session()->setFlashdata('success', 'Data berhasil disimpan!' . $dataDump);
-            return redirect()->to('/admin/users');
-        } else {
-            session()->setFlashdata('error', 'Data gagal disimpan!');
-            return redirect()->to('/admin/users');
-        }
-        // session()->setFlashdata('success', 'Data berhasil ditambahkan.');
-        // $this->userM->save($data);
-        // return redirect()->to('/admin/users');
+        // if ($this->userM->withGroup('administrator')->save($data)) {
+        //     session()->setFlashdata('success', 'Data berhasil disimpan!');
+        //     return redirect()->to('/admin/users');
+        // } else {
+        //     session()->setFlashdata('error', 'Data gagal disimpan!');
+        //     return redirect()->to('/admin/users');
+        // }
+
+        $this->userM->save($data);
+        session()->setFlashdata('success', 'Data berhasil ditambahkan.');
+        return redirect()->to('/admin/users');
     }
     public function edit($id)
     {
