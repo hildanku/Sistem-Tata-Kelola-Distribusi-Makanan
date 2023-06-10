@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 06:06 PM
+-- Generation Time: Jun 10, 2023 at 08:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,6 +47,13 @@ CREATE TABLE `auth_groups` (
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `auth_groups`
+--
+
+INSERT INTO `auth_groups` (`id`, `name`, `description`) VALUES
+(1, 'administrator', 'Manage all data                                                                                                                                                                                                                                       ');
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +75,13 @@ CREATE TABLE `auth_groups_users` (
   `group_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
   `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `auth_groups_users`
+--
+
+INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +115,43 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (10, '::1', 'siapanich01@gmail.com', 1, '2023-05-25 04:09:48', 1),
 (11, '::1', 'siapanich01@gmail.com', 1, '2023-05-26 12:42:48', 1),
 (12, '::1', 'siapanich01@gmail.com', 1, '2023-05-27 02:21:21', 1),
-(13, '::1', 'siapanich01@gmail.com', 1, '2023-05-29 12:14:10', 1);
+(13, '::1', 'siapanich01@gmail.com', 1, '2023-05-29 12:14:10', 1),
+(14, '::1', 'siapanich01@gmail.com', 1, '2023-05-31 07:36:37', 1),
+(15, '::1', 'siapanich01@gmail.com', 1, '2023-05-31 11:31:56', 1),
+(16, '::1', 'siapanich01@gmail.com', 1, '2023-05-31 11:45:55', 1),
+(17, '::1', 'siapanich01@gmail.com', 1, '2023-06-01 03:50:57', 1),
+(18, '::1', 'siapanich01@gmail.com', 1, '2023-06-03 03:02:46', 1),
+(19, '::1', 'siapanich01@gmail.com', 1, '2023-06-03 05:37:56', 1),
+(20, '::1', 'siapanich01@gmail.com', 1, '2023-06-03 14:41:35', 1),
+(21, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 04:44:45', 1),
+(22, '::1', 'hildankusto', NULL, '2023-06-04 05:02:48', 0),
+(23, '::1', 'hildankusto', NULL, '2023-06-04 05:02:52', 0),
+(24, '::1', 'hildankusto', NULL, '2023-06-04 05:04:38', 0),
+(25, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 05:09:56', 1),
+(26, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 06:35:30', 1),
+(27, '::1', 'readybang001', NULL, '2023-06-04 07:05:05', 0),
+(28, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:05:10', 1),
+(29, '::1', 'demodemo001', NULL, '2023-06-04 07:05:58', 0),
+(30, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:06:44', 1),
+(31, '::1', 'bcrypt001', NULL, '2023-06-04 07:15:35', 0),
+(32, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:15:47', 1),
+(33, '::1', 'xliyobo10', NULL, '2023-06-04 07:16:38', 0),
+(34, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:18:41', 1),
+(35, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:18:42', 1),
+(36, '::1', 'hildankusto', NULL, '2023-06-04 07:20:41', 0),
+(37, '::1', 'hildankusto', NULL, '2023-06-04 07:20:50', 0),
+(38, '::1', 'hildankusto', NULL, '2023-06-04 07:21:03', 0),
+(39, '::1', 'ridhoo001', NULL, '2023-06-04 07:35:28', 0),
+(40, '::1', 'ridhoo001', NULL, '2023-06-04 07:36:59', 0),
+(41, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:37:03', 1),
+(42, '::1', 'ridhoo001', NULL, '2023-06-04 07:57:03', 0),
+(43, '::1', 'siapanich01@gmail.com', 1, '2023-06-04 07:59:12', 1),
+(44, '::1', 'siapanich01@gmail.com', 1, '2023-06-08 14:48:17', 1),
+(45, '::1', 'siapanich01@gmail.com', 1, '2023-06-09 04:02:35', 1),
+(46, '::1', 'siapanich01@gmail.com', 1, '2023-06-09 21:38:49', 1),
+(47, '::1', 'pandongaku1', NULL, '2023-06-09 21:54:15', 0),
+(48, '::1', 'hildankutomeeeeo@gmail.com', 24, '2023-06-09 21:54:43', 1),
+(49, '::1', 'hildanksssutomo@gmail.com', 26, '2023-06-09 21:58:38', 1);
 
 -- --------------------------------------------------------
 
@@ -179,8 +229,12 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `uuid`, `shop_name`, `shop_owner`, `shop_address`, `phone_number`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(5, '646ef334ae6ff', 'HenryShop', 'Henry D', 'Jl. Kenangan No36 Cempaka Putih', 2147483647, 'henry@denata.com', '', '2023-05-24 22:33:40', '2023-05-24 22:33:40'),
-(7, '6474ba65b9a20', 'DNR.STORE', 'DinaRahma', 'TanjungBale', 2147483647, 'adsas@ca.com', '', '2023-05-29 07:44:53', '2023-05-29 07:44:53');
+(5, '646ef334ae6ff', 'HenryShop', 'Henry D', 'Jl. Kenangan No36 Cempaka Putih', 2147483647, 'henry@denata.com', 'Active', '2023-05-24 22:33:40', '2023-05-24 22:33:40'),
+(7, '6474ba65b9a20', 'DNR.STORE', 'DinaRahma', 'TanjungBale', 2147483647, 'adsas@ca.com', '', '2023-05-29 07:44:53', '2023-05-29 07:44:53'),
+(9, '647ad1d826a6d', 'dasd', 'sada', 'asda', 0, 'dasda', '', '2023-06-02 22:38:32', '2023-06-02 22:38:32'),
+(10, '', 'testing', 'testing', 'testing', 2147483647, 'hildanddkutomo@gmail.com', '', '2023-06-09 15:40:30', '2023-06-09 15:40:30'),
+(11, '', 'sadasd', '', 'asdasdas', 2147483647, 'hildankutomssso@gmail.com', '', '2023-06-09 15:41:32', '2023-06-09 15:41:32'),
+(12, '', 'testings', 'testings', 'sadasdasdas', 0, 'testings', '', '2023-06-09 15:42:38', '2023-06-09 15:45:42');
 
 -- --------------------------------------------------------
 
@@ -208,7 +262,12 @@ CREATE TABLE `distributions` (
 
 INSERT INTO `distributions` (`distribution_id`, `driver_id`, `product_id`, `distribution_description`, `distribution_destination`, `purchase_amount`, `pay_amount`, `distribution_datetime`, `distribution_progress`, `created_at`, `updated_at`) VALUES
 (5, 3, 1, 'dasdasdas', '0', '', '', '2023-05-03 14:08:00', 'diterima', '2023-05-29 07:08:47', '2023-05-29 07:08:47'),
-(6, 3, 1, 'dasdas', 'TanjungPinang', '', '', '2023-05-04 14:10:00', 'diproses', '2023-05-29 07:10:18', '2023-05-29 07:10:18');
+(6, 3, 1, 'dasdas', 'TanjungPinang', '', '', '2023-05-04 14:10:00', 'diproses', '2023-05-29 07:10:18', '2023-05-29 07:10:18'),
+(7, 3, 1, 'das', 'TanjungPinang', '44', '528000', '2023-05-06 10:14:00', 'batal', '2023-05-31 03:17:42', '2023-06-02 20:37:58'),
+(8, 5, 10, 'ada aja', 'TanjungPinang', '20', '240000', '2023-05-31 10:23:00', 'dalam_perjalanan', '2023-05-31 03:27:49', '2023-05-31 03:27:49'),
+(9, 3, 1, 'dasda', 'sadas', '5', '60000', '2023-05-31 10:28:00', 'diterima', '2023-05-31 03:28:24', '2023-06-02 20:41:35'),
+(10, 3, 10, 'adasd', 'asdfasdas', '2', '24000', '2023-05-20 10:36:00', 'diproses', '2023-05-31 03:36:54', '2023-05-31 03:36:54'),
+(11, 3, 1, 'ewew', 'TanjungPinang', '2', '24000', '2023-06-29 23:00:00', 'batal', '2023-06-09 16:00:19', '2023-06-09 16:00:37');
 
 -- --------------------------------------------------------
 
@@ -233,7 +292,7 @@ CREATE TABLE `drivers` (
 INSERT INTO `drivers` (`driver_id`, `driver_name`, `driver_phone`, `driver_email`, `driver_status`, `created_at`, `updated_at`) VALUES
 (3, 'Hendro Gunawan', '08312220210', 'hildankutomo@gmail.com', 'Active', '2023-05-29 05:42:41', '2023-05-29 05:42:41'),
 (4, 'Ridwan Kurniawan', '083124062506', 'mencariarti@selamanyatakanberhenti.c', 'Active', '2023-05-29 08:25:00', '2023-05-29 08:25:00'),
-(5, 'Supriyadi', '08312220210', 'hildankutomo@gmail.com', 'Active', '2023-05-29 08:25:14', '2023-05-29 08:25:14');
+(5, 'Supriyadie', '08312220210', 'hildankutomo@gmail.com', 'Active', '2023-05-29 08:25:14', '2023-06-09 16:01:08');
 
 -- --------------------------------------------------------
 
@@ -304,8 +363,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `category_id`, `product_made`, `product_expired`, `created_at`, `updated_at`) VALUES
-(1, 'Keju Mozzarela', 'Lezat Enak Bergizi', 26000, '5', 1, '2022-05-01', '2022-12-01', '2023-05-25 04:27:03', '2023-05-24 22:26:11'),
-(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '50', 1, '2023-12-01', '2029-12-12', '2023-05-24 22:36:03', '2023-05-24 22:36:23');
+(1, 'Keju Mozzarela', 'Lezat Enak Bergizi', 26000, '49', 1, '2022-05-01', '2022-12-01', '2023-05-25 04:27:03', '2023-06-02 20:28:29'),
+(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '80', 1, '2023-06-23T06:01', '2023-07-06T06:01', '2023-05-24 22:36:03', '2023-06-09 16:01:35');
 
 -- --------------------------------------------------------
 
@@ -336,7 +395,6 @@ INSERT INTO `products_category` (`category_id`, `category_name`, `created_at`, `
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
-  `uuid` char(30) NOT NULL,
   `email` varchar(255) NOT NULL,
   `fullname` varchar(30) DEFAULT NULL,
   `username` varchar(30) DEFAULT NULL,
@@ -358,8 +416,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `email`, `fullname`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '', 'siapanich01@gmail.com', NULL, 'hildankusto', '$2y$10$J3XnpRmg9r/4rj40XWm.Duhw7BFmwfTqFWkObPpS4rHIGxyvsFX6W', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-05-02 16:12:12', '2023-05-02 16:12:12', NULL);
+INSERT INTO `users` (`id`, `email`, `fullname`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'siapanich01@gmail.com', NULL, 'hildankusto', '$2y$10$J3XnpRmg9r/4rj40XWm.Duhw7BFmwfTqFWkObPpS4rHIGxyvsFX6W', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-05-02 16:12:12', '2023-05-02 16:12:12', NULL),
+(26, 'hildanksssutomo@gmail.com', 'usersusers', 'usersusers', '$2y$10$PERNCKrWN.esnUCsASSTC.tmfI3oph1s6Bo70bzY81ZqRVza47BZy', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-06-09 21:58:25', '2023-06-09 21:58:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -522,13 +581,13 @@ ALTER TABLE `auth_activation_attempts`
 -- AUTO_INCREMENT for table `auth_groups`
 --
 ALTER TABLE `auth_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -552,13 +611,13 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `distributions`
 --
 ALTER TABLE `distributions`
-  MODIFY `distribution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `distribution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `drivers`
@@ -594,7 +653,7 @@ ALTER TABLE `products_category`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `webconfig`
