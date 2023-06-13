@@ -41,7 +41,10 @@ class News extends BaseController
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
-        if ($this->newsM->save($data)) {
+
+        //  $filter = esc($data);
+
+        if ($this->newsM->save(esc($data))) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/news');
         } else {
@@ -68,7 +71,7 @@ class News extends BaseController
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
-     if ($this->newsM->where('id', $id)->set($data)->update()) {
+     if ($this->newsM->where('id', $id)->set(esc($data))->update()) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/news');
         } else {

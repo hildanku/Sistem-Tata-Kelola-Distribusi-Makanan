@@ -48,7 +48,7 @@ class User extends BaseController
         ];
 
         $users = new UserEntity();
-        $users->fill($data);
+        $users->fill(esc($data));
         $users->setPassword($data['password_hash']);
     
         if ($this->userM->save($users)){
@@ -80,8 +80,12 @@ class User extends BaseController
             'password_hash' => $this->request->getPost('password_hash'),
             'active' => $this->request->getPost('active'),
         ];
-    
-        if ($this->userM->where('id', $id)->set($data)->update()) {
+        $users = new UserEntity();
+        $users->fill(esc($data));
+        $users->setPassword($data['password_hash']);
+
+        // if ($this->userM->where('id', $id)->set($users)->update()) {
+            if ($this->userM->update($id, $users)) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/users');
         } else {
