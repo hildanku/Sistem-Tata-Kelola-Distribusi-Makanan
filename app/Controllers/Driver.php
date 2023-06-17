@@ -45,7 +45,7 @@ class Driver extends BaseController
             'driver_email' => $this->request->getPost('driver_email'),
             'driver_status' => $this->request->getPost('driver_status'),
         ];
-        if ($this->driverM->save($data)) {
+        if ($this->driverM->save(esc($data))) {
           session()->setFlashdata('success', 'Data berhasil diperbarui!');
           return redirect()->to('/admin/drivers');
       } else {
@@ -72,7 +72,7 @@ class Driver extends BaseController
           'driver_email' => $this->request->getPost('driver_email'),
           'driver_status' => $this->request->getPost('driver_status'),
         ];
-        if ($this->driverM->where('driver_id', $driver_id)->set($data)->update()) {
+        if ($this->driverM->where('driver_id', $driver_id)->set(esc($data))->update()) {
           session()->setFlashdata('success', 'Data berhasil diperbarui!');
           return redirect()->to('/admin/drivers');
       } else {

@@ -43,12 +43,12 @@ class ProductCategory extends BaseController
         $data = [
             'category_name' => $this->request->getPost('category_name')
         ];
-        if ($this->productcatM->save($data)) {
+        if ($this->productcatM->save(esc($data))) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
-            return redirect()->to('/admin/users');
+            return redirect()->to('/admin/product/category2');
         } else {
             session()->setFlashdata('error', 'Data gagal diperbarui!');
-            return redirect()->to('/admin/users');
+            return redirect()->to('/admin/product/category');
         }
     }
     public function edit($category_id)
@@ -69,7 +69,7 @@ class ProductCategory extends BaseController
         $data = [
             'category_name' => $this->request->getPost('category_name'),
         ];
-        if ($this->productCatM->where('id', $id)->set($data)->update()) {
+        if ($this->productcatM->where('category_id', $category_id)->set(esc($data))->update()) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/product/category');
         } else {

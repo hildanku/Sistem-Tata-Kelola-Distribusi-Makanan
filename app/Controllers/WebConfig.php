@@ -38,7 +38,7 @@ class WebConfig extends BaseController
           'app_name' => $this->request->getPost('app_name'),
           'description' => $this->request->getPost('description'),
       ];
-      if ($this->webconfigM->where('id', $id)->set($data)->update()) {
+      if ($this->webconfigM->where('id', $id)->set(esc($data))->update()) {
           session()->setFlashdata('success', 'Data berhasil diperbarui!');
           return redirect()->to('/admin/webconfig');
       } else {

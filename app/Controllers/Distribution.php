@@ -88,7 +88,7 @@ class Distribution extends BaseController
             'distribution_progress' => $this->request->getPost('distribution_progress')
         ];
     
-        if ($this->distributionM->save($data)){
+        if ($this->distributionM->save(esc($data))){
           session()->setFlashdata('success', 'Data berhasil ditambahkan.');
           return redirect()->to('/admin/distributions');
         } else {
@@ -143,7 +143,7 @@ class Distribution extends BaseController
             'distribution_description' => $this->request->getPost('distribution_description'),
             'distribution_progress' => $this->request->getPost('distribution_progress')
         ];
-        if ($this->distributionM->where('distribution_id', $distribution_id)->set($data)->update()) {
+        if ($this->distributionM->where('distribution_id', $distribution_id)->set(esc($data))->update()) {
           session()->setFlashdata('success', 'Data berhasil diperbarui!');
           return redirect()->to('/admin/distributions');
       } else {

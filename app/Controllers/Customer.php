@@ -46,7 +46,7 @@ class Customer extends BaseController
           'status' => $this->request->getPost('status'),
       ];
 
-      if ($this->customerM->save($data)){
+      if ($this->customerM->save(esc($data))){
         session()->setFlashdata('success', 'Data berhasil ditambahkan.');
         return redirect()->to('/admin/customers');
       } else {
@@ -80,7 +80,7 @@ class Customer extends BaseController
           'status' => $this->request->getPost('status'),
         ];
 
-        if ($this->customerM->where('id', $id)->set($data)->update()) {
+        if ($this->customerM->where('id', $id)->set(esc($data))->update()) {
           session()->setFlashdata('success', 'Data berhasil diperbarui!');
           return redirect()->to('/admin/customers');
         } else {

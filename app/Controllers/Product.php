@@ -54,7 +54,7 @@ class Product extends BaseController
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];
-        if ($this->productM->save($data)) {
+        if ($this->productM->save(esc($data))) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/products');
         } else {
@@ -88,7 +88,7 @@ class Product extends BaseController
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];
-        if ($this->productM->where('product_id', $product_id)->set($data)->update()) {
+        if ($this->productM->where('product_id', $product_id)->set(esc($data))->update()) {
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to('/admin/products');
         } else {
