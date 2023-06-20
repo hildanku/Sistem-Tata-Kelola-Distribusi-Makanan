@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2023 at 08:31 AM
+-- Generation Time: Jun 20, 2023 at 02:49 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -151,7 +151,16 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (46, '::1', 'siapanich01@gmail.com', 1, '2023-06-09 21:38:49', 1),
 (47, '::1', 'pandongaku1', NULL, '2023-06-09 21:54:15', 0),
 (48, '::1', 'hildankutomeeeeo@gmail.com', 24, '2023-06-09 21:54:43', 1),
-(49, '::1', 'hildanksssutomo@gmail.com', 26, '2023-06-09 21:58:38', 1);
+(49, '::1', 'hildanksssutomo@gmail.com', 26, '2023-06-09 21:58:38', 1),
+(50, '::1', 'siapanich01@gmail.com', 1, '2023-06-10 10:22:24', 1),
+(51, '::1', 'hildankusto', NULL, '2023-06-13 05:38:28', 0),
+(52, '::1', 'siapanich01@gmail.com', 1, '2023-06-13 05:38:49', 1),
+(53, '::1', 'siapanich01@gmail.com', 1, '2023-06-13 06:07:22', 1),
+(54, '::1', 'hildankutoeeemo@gmail.com', 35, '2023-06-13 06:45:30', 1),
+(55, '::1', 'siapanich01@gmail.com', 1, '2023-06-13 06:45:48', 1),
+(56, '::1', 'hildankusto\'', NULL, '2023-06-18 10:24:55', 0),
+(57, '::1', 'siapanich01@gmail.com', 1, '2023-06-18 10:28:22', 1),
+(58, '::1', 'siapanich01@gmail.com', 1, '2023-06-20 12:35:50', 1);
 
 -- --------------------------------------------------------
 
@@ -352,6 +361,7 @@ CREATE TABLE `products` (
   `product_price` int(36) NOT NULL,
   `product_quantity` varchar(36) NOT NULL,
   `category_id` int(5) NOT NULL,
+  `category` varchar(36) NOT NULL,
   `product_made` varchar(255) NOT NULL,
   `product_expired` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -362,30 +372,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `category_id`, `product_made`, `product_expired`, `created_at`, `updated_at`) VALUES
-(1, 'Keju Mozzarela', 'Lezat Enak Bergizi', 26000, '49', 1, '2022-05-01', '2022-12-01', '2023-05-25 04:27:03', '2023-06-02 20:28:29'),
-(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '80', 1, '2023-06-23T06:01', '2023-07-06T06:01', '2023-05-24 22:36:03', '2023-06-09 16:01:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products_category`
---
-
-CREATE TABLE `products_category` (
-  `category_id` int(5) NOT NULL,
-  `category_name` varchar(36) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products_category`
---
-
-INSERT INTO `products_category` (`category_id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'Makanan Tahan Lama', '2023-05-25 04:26:17', '2023-05-29 08:24:28'),
-(2, 'Vegetarian', '2023-05-25 04:50:36', '2023-05-25 04:50:36');
+INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `category_id`, `category`, `product_made`, `product_expired`, `created_at`, `updated_at`) VALUES
+(1, 'Keju Mozzarela', 'Lezat Enak Bergizi', 26000, '49', 1, '', '2022-05-01', '2022-12-01', '2023-05-25 04:27:03', '2023-06-02 20:28:29'),
+(10, 'Lanting Bumbu', 'Lanting Enak Bergizi', 12000, '80', 1, '', '2023-06-23T06:01', '2023-07-06T06:01', '2023-05-24 22:36:03', '2023-06-09 16:01:35'),
+(13, 'dBE GM 200 7.1 Virtual Surround', '7.1 Virtual Surround', 200000, '5', 0, 'Headset', '2023-06-20T19:39', '2023-07-08T19:40', '2023-06-20 05:41:08', '2023-06-20 05:41:08'),
+(14, 'HyperX Cloud Alpha', '7.1 Sound', 1500000, '6', 0, 'Headsets', '2023-06-20T19:42', '2023-07-07T19:42', '2023-06-20 05:42:10', '2023-06-20 05:44:57');
 
 -- --------------------------------------------------------
 
@@ -441,7 +432,7 @@ CREATE TABLE `webconfig` (
 --
 
 INSERT INTO `webconfig` (`id`, `app_logo`, `app_name`, `app_title`, `description`, `created_at`, `updated_at`) VALUES
-(1, '', 'SITAKESIMA', 'SITAKESIMA::DASHBOARD', '', '2023-05-12 01:10:47', '2023-05-29 08:16:59');
+(1, '', 'SITAKESIMA:YYYY', 'SITAKESIMA:YYYY', '', '2023-05-12 01:10:47', '2023-06-12 23:50:24');
 
 --
 -- Indexes for dumped tables
@@ -548,12 +539,6 @@ ALTER TABLE `products`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `products_category`
---
-ALTER TABLE `products_category`
-  ADD PRIMARY KEY (`category_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -587,7 +572,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -635,25 +620,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `products_category`
---
-ALTER TABLE `products_category`
-  MODIFY `category_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `webconfig`
@@ -691,13 +670,6 @@ ALTER TABLE `auth_tokens`
 ALTER TABLE `auth_users_permissions`
   ADD CONSTRAINT `auth_users_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `auth_permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `auth_users_permissions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `products_category` (`category_id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `products_category` (`category_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
