@@ -12,7 +12,7 @@ class ProductModel extends Model
     protected $useAutoIncrement = true;
 // walaupun kolom berelasi harus tetap ditulis di model
 
-    protected $allowedFields = ['product_name', 'product_description', 'product_price', 'product_quantity', 'product_made','category_id', 'product_expired'];
+    protected $allowedFields = ['product_name', 'product_description', 'product_price', 'product_quantity', 'product_made', 'category', 'product_expired'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

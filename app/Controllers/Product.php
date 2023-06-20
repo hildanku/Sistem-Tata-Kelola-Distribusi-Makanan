@@ -35,10 +35,8 @@ class Product extends BaseController
     public function add()
     {
         $config = $this->webconfigM->first();
-        $getCategory = $this->productcatM->findAll();
 
         return view('Admin/Products/add', [
-            'getCategory' => $getCategory,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
         ]);
@@ -50,7 +48,7 @@ class Product extends BaseController
             'product_description' => $this->request->getPost('product_description'),
             'product_price' => $this->request->getPost('product_price'),
             'product_quantity' => $this->request->getPost('product_quantity'),
-            'category_id' => $this->request->getPost('category_id'),
+            'category' => $this->request->getPost('category'),
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];
@@ -66,11 +64,9 @@ class Product extends BaseController
     {
         helper('form');
         $config = $this->webconfigM->first();
-        $getCategory = $this->productcatM->findAll();
         $data = $this->productM->where('product_id', $product_id)->first();
       
         return view('Admin/Products/edit', [
-            'getCategory' => $getCategory,
             'data' => $data,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
@@ -84,7 +80,7 @@ class Product extends BaseController
             'product_description' => $this->request->getPost('product_description'),
             'product_price' => $this->request->getPost('product_price'),
             'product_quantity' => $this->request->getPost('product_quantity'),
-            'category_id' => $this->request->getPost('category_id'),
+            'category' => $this->request->getPost('category'),
             'product_made' => $this->request->getPost('product_made'),
             'product_expired' => $this->request->getPost('product_expired'),
         ];

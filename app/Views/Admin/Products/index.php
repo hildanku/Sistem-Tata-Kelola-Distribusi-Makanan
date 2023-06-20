@@ -42,7 +42,7 @@
                                             <td><?= $data['product_description'] ?></td>
                                             <td><?= $data['product_price'] ?></td>
                                             <td><?= $data['product_quantity'] ?></td>
-                                            <td><?= $data['category_id'] ?></td>
+                                            <td><?= $data['category'] ?></td>
                                             <td><?= $data['product_made'] ?></td>
                                             <td><?= $data['product_expired'] ?></td>
                                             <td>
