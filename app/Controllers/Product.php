@@ -4,18 +4,15 @@ namespace App\Controllers;
 
 use App\Models\WebConfigModel; 
 use App\Models\ProductModel;  
-use App\Models\ProductCategoryModel;
 
 class Product extends BaseController
 {
     protected $webconfigM;
     protected $productM;
-    protected $productcatM;
     public function __construct()
     {
         $this->webconfigM = new WebConfigModel();
         $this->productM = new ProductModel();
-        $this->productcatM = new ProductCategoryModel();
     }
     public function index()
     {
@@ -26,7 +23,6 @@ class Product extends BaseController
         $getData = $this->productM->findAll();
         return view('Admin/Products/index', [
             'getData' => $getData,
-      //      'getCategory' => $getCategory,
             'appTitle' => $config['app_title'],
             'appName' => $config['app_name']
             ]);
